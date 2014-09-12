@@ -19,6 +19,8 @@ public:
 
     void drawBackground(QPainter *painter, const QRectF &rect);
 
+    void DrawContactsLine(QPainter *painter, const QRectF &rect);
+
     static void SetSceneSieze(int width, int height)
     {
         scene_width = width;
@@ -50,6 +52,9 @@ public:
     bool ChangeSiezeBlocks(QString s);
     bool ChangeDifferentParametrs(QString s);
 
+
+    QVector<MainElement *> getArrElement() const;
+    void setArrElement(const QVector<MainElement *> &value);
 
 private:
     static int scene_width;

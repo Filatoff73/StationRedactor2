@@ -7,6 +7,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QPen>
+#include <blockrelay.h>
 
 int MainElement::STEP_GRID=0;
 int MainElement::rad=0;
@@ -26,15 +27,52 @@ MainElement::MainElement(QGraphicsObject* parent) : QGraphicsObject(parent)
     question = new QDialog;
 
 
+
+
+
+
+
+
+
 }
 
 void MainElement::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->drawText(sizeX/2.0*STEP_GRID, sizeY/2.0*STEP_GRID, nameElement);
 
+    painter->setRenderHint(QPainter::Antialiasing);
+
     QPen pen = painter->pen();
     pen.setWidth(widthLinesElements);
     painter->setPen(pen);
+
+
+
+}
+
+void MainElement::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    QGraphicsItem::mouseReleaseEvent(event);
+
+    QVector<MainElement*> a = dynamic_cast<Scene*>(this->scene())->getArrElement();
+
+    bool fl = true;
+    while(fl)
+    {
+        fl=false;
+    for(int i=0;i<a.size();i++)
+    {
+        if(a[i]->pos()==this->pos() && a[i]!=this)
+        {
+            this->moveBy(STEP_GRID, STEP_GRID);
+            fl=true;
+
+        }
+    }
+    }
+
+
+    a.clear();
 
 }
 
@@ -150,20 +188,10 @@ QVariant MainElement::itemChange(GraphicsItemChange change, const QVariant &valu
             newPos.setX(0);
         }
 
-        /*if(newPos.x()>this->scene()->width())
-        {
-            newPos.setX(this->scene()->width());
-        }*/
-
         if(newPos.y()<0)
         {
             newPos.setY(0);
         }
-
-        /*if(newPos.y()>this->scene()->height())
-        {
-            newPos.setY(this->scene()->height());
-        }*/
 
         if(QApplication::mouseButtons() == Qt::LeftButton)
         {
@@ -171,6 +199,8 @@ QVariant MainElement::itemChange(GraphicsItemChange change, const QVariant &valu
             qreal xV = round(newPos.x()/gridSize)*gridSize;
             qreal yV = round(newPos.y()/gridSize)*gridSize;
             this->scene()->update(this->scene()->sceneRect());
+
+
             return QPointF(xV, yV);
         }
         else

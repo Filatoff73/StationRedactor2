@@ -25,6 +25,8 @@ public:
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
+
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
     void SetContact();

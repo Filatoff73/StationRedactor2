@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QMouseEvent>
 #include <QWheelEvent>
+#include <QAbstractScrollArea>
 
 class View : public QGraphicsView
 {

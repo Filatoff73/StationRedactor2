@@ -67,7 +67,7 @@ void Contacts::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 
 void Contacts::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-
+painter->setRenderHint(QPainter::Antialiasing);
     switch (contactOrientation) {
     case Bottom:
         painter->drawText(positionContact.x(),positionContact.y()-6,nameContact);
@@ -92,7 +92,7 @@ void Contacts::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
     painter->drawEllipse(this->rect());
 
-    if(neighbourContact!=NULL && neighbourContact->GetNeighbour()!=NULL && !isDrawedConnection)
+    /*if(neighbourContact!=NULL && neighbourContact->GetNeighbour()!=NULL && !isDrawedConnection)
     {
 
     int xpos1 = positionContact.x();//+ mapToScene(parentItem()->pos()).x();
@@ -143,8 +143,6 @@ void Contacts::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
     }
     }
-
-
 
     if((contactOrientation==Left && neighbourContact->Getorientation()==Right) )
     {
@@ -204,8 +202,6 @@ void Contacts::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
     }
     }
-
-
 
     if((contactOrientation==Top && neighbourContact->Getorientation()==Top))
     {
@@ -291,7 +287,6 @@ void Contacts::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     }
     }
 
-
     if((contactOrientation==Top && neighbourContact->Getorientation()==Left))
     {
         painter->drawLine(xpos1,ypos1, xpos1, upLine1);
@@ -327,7 +322,6 @@ void Contacts::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
         painter->drawLine(xpos2, upLine2 , xpos2, ypos2 );
 
     }
-
 
     if((contactOrientation==Bottom && neighbourContact->Getorientation()==Left))
     {
@@ -369,7 +363,7 @@ void Contacts::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
     neighbourContact->setIsDrawedConnection(true);
 
-    }
+    }*/
 
 
 }
@@ -382,4 +376,6 @@ void Contacts::setIsDrawedConnection(bool value)
 {
     isDrawedConnection = value;
 }
+
+
 

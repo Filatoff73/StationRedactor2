@@ -15,9 +15,9 @@ BlockRelay::BlockRelay(QGraphicsObject* parent) : MainElement(parent)
     idElement=1;
 
      nContactsLeft=2;
-     nContactsRight=2;
-     nContactsUp=3;
-     nContactsDown=3;
+     nContactsRight=3;
+     nContactsUp=4;
+     nContactsDown=5;
 
      nContacts = nContactsDown + nContactsUp + nContactsLeft + nContactsRight;
 

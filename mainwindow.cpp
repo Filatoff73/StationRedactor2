@@ -22,6 +22,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->sceneLayout->addWidget(view);
 
+    this->setGeometry(110,110,900,900);
+
+
+
+
     connect(ui->addBlock, SIGNAL(clicked()), this, SLOT(AddBlockButton()));
     connect(ui->deleteConnection, SIGNAL(clicked()), this, SLOT(DeleteConnection()));
     connect(ui->widthLines, SIGNAL(clicked()), this, SLOT(WidthLines()));

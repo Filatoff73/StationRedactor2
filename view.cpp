@@ -1,12 +1,16 @@
 #include "view.h"
 #include "mainelement.h"
 #include <QScrollBar>
+#include <scene.h>
+#include <mainelement.h>
 
 View::View(QGraphicsView* parent) : QGraphicsView(parent)
 {
     this->setAlignment(Qt::AlignTop | Qt::AlignLeft);
     this->horizontalScrollBar()->setValue(1);
     this->verticalScrollBar()->setValue(1);
+
+
 
 }
 
@@ -26,3 +30,5 @@ void View::wheelEvent(QWheelEvent* event)
         this->verticalScrollBar()->setValue(1);
     }
 }
+
+

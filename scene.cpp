@@ -177,6 +177,16 @@ bool Scene::ChangeDifferentParametrs(QString s)
           return false;
      }
 }
+QVector<MainElement *> Scene::getArrElement() const
+{
+    return arrElement;
+}
+
+void Scene::setArrElement(const QVector<MainElement *> &value)
+{
+    arrElement = value;
+}
+
 
 bool Scene::ChangeSiezeBlocks(QString s)
 {
@@ -293,14 +303,324 @@ void Scene::drawBackground(QPainter *painter, const QRectF &rect)
     painter->setPen(QPen(Qt::lightGray, 0.0));
     painter->drawLine(0, realTop, 0, realBottom);
     painter->drawLine(realLeft, 0, realRight, 0);
+
+
+    DrawContactsLine(painter, rect);
 }
 
+void Scene::DrawContactsLine(QPainter *painter, const QRectF &rect)
+{
+
+    for(int i=0; i<arrElement.size();i++)
+    {
+        QVector<Contacts*> a = arrElement[i]->GetArrContacts();
+        for(int j=0;j<a.size();j++)
+        {
+
+            Contacts* neighbourContact = a[j]->GetNeighbour();
+
+            if(neighbourContact!=NULL && neighbourContact->GetNeighbour()!=NULL && !a[j]->getIsDrawedConnection())
+                {
+
+                QPen pen = a[j]->pen();
+                pen.setWidth(MainElement::getWidthLinesContacts());
+                painter->setPen(pen);
+
+                int xpos1 = a[j]->GetPositionContact().x()+a[j]->parentItem()->pos().x();
+                int ypos1 = a[j]->GetPositionContact().y()+a[j]->parentItem()->pos().y();
+
+                int xpos2 = neighbourContact->GetPositionContact().x()+neighbourContact->parentItem()->pos().x();
+                int ypos2 = neighbourContact->GetPositionContact().y()+neighbourContact->parentItem()->pos().y();
+
+
+                int rightDefaultX = (dynamic_cast<MainElement*>(a[j]->parentItem())->getSizeX()+0.5)*MainElement::GetStepGrid() + a[j]->parentItem()->pos().x();
+                 int downDefaultY  = (dynamic_cast<MainElement*>(a[j]->parentItem())->getSizeY()+0.5)*MainElement::GetStepGrid() + a[j]->parentItem()->pos().y();
+
+                 int upLine1=ypos1-MainElement::GetStepGrid()/2.0;
+                 int downLine1=ypos1+MainElement::GetStepGrid()/2.0;
+                 int leftLine1=xpos1-MainElement::GetStepGrid()/2.0;
+                 int rightLine1=xpos1+MainElement::GetStepGrid()/2.0;
+
+                 int upLine2=ypos2-MainElement::GetStepGrid()/2.0;
+                 int downLine2=ypos2+MainElement::GetStepGrid()/2.0;
+                 int leftLine2=xpos2-MainElement::GetStepGrid()/2.0;
+                 int rightLine2=xpos2+MainElement::GetStepGrid()/2.0;
+
+
+                qDebug()<<"xpos1="<<xpos1<<endl;
+                qDebug()<<"ypos1="<<ypos1<<endl;
+                qDebug()<<"xpos2="<<xpos2<<endl;
+                qDebug()<<"ypos2="<<ypos2<<endl;
+
+                if((a[j]->Getorientation()==Right && neighbourContact->Getorientation()==Left) )
+                {
+                if(xpos1<xpos2)
+                {
+                    painter->drawLine(xpos1, ypos1, rightLine1, ypos1);
+                    painter->drawLine(rightLine1, ypos1, rightLine1, ypos2 );
+                    painter->drawLine(rightLine1, ypos2, xpos2, ypos2 );
+                }
+
+                if(xpos1>=xpos2)
+                {
+                painter->drawLine(xpos1, ypos1, rightLine1, ypos1);
+                painter->drawLine(rightLine1, ypos1, rightLine1, downDefaultY );
+                painter->drawLine(rightLine1, downDefaultY, leftLine2, downDefaultY );
+
+                painter->drawLine(leftLine2, downDefaultY, leftLine2, ypos2 );
+                painter->drawLine(leftLine2, ypos2, xpos2, ypos2 );
+
+                }
+                }
+
+                if((a[j]->Getorientation()==Left && neighbourContact->Getorientation()==Right) )
+                {
+                    if(xpos1<=xpos2)
+                    {
+                        painter->drawLine(xpos1, ypos1, leftLine1, ypos1);
+                        painter->drawLine(leftLine1, ypos1, leftLine1, downDefaultY );
+                        painter->drawLine(leftLine1, downDefaultY, rightLine2, downDefaultY );
+
+                        painter->drawLine(rightLine2, downDefaultY, rightLine2, ypos2 );
+                        painter->drawLine(rightLine2, ypos2, xpos2, ypos2 );
+
+
+                    }
+
+                    if(xpos1>xpos2)
+                    {
+                        painter->drawLine(xpos1, ypos1, leftLine1, ypos1);
+                        painter->drawLine(leftLine1, ypos1, leftLine1, ypos2 );
+                        painter->drawLine(leftLine1, ypos2, xpos2, ypos2 );
+                    }
+                }
+
+                if((a[j]->Getorientation()==Left && neighbourContact->Getorientation()==Left))
+                {
+                if(xpos1<=xpos2)
+                {
+                painter->drawLine(xpos1, ypos1, leftLine1, ypos1);
+                painter->drawLine(leftLine1, ypos1, leftLine1, ypos2 );
+                painter->drawLine(leftLine1, ypos2, xpos2, ypos2 );
+                }
+
+                if(xpos1>xpos2)
+                {
+                    painter->drawLine(xpos2, ypos2, leftLine2, ypos2);
+                    painter->drawLine(leftLine2, ypos2, leftLine2, ypos1 );
+                    painter->drawLine(leftLine2, ypos1, xpos1, ypos1 );
+
+                }
+                }
+
+                if((a[j]->Getorientation()==Right && neighbourContact->Getorientation()==Right))
+                {
+                if(xpos1<=xpos2)
+                {
+                    painter->drawLine(xpos2, ypos2, rightLine2, ypos2);
+                    painter->drawLine(rightLine2, ypos2, rightLine2, ypos1 );
+                    painter->drawLine(rightLine2, ypos1, xpos1, ypos1 );
+
+                }
+
+                if(xpos1>xpos2)
+                {
+                    painter->drawLine(xpos1, ypos1, rightLine1, ypos1);
+                    painter->drawLine(rightLine1, ypos1, rightLine1, ypos2 );
+                    painter->drawLine(rightLine1, ypos2, xpos2, ypos2 );
+
+                }
+                }
+
+                if((a[j]->Getorientation()==Top && neighbourContact->Getorientation()==Top))
+                {
+                if(ypos1<=ypos2)
+                {
+                    painter->drawLine(xpos1, ypos1, xpos1 , upLine1);
+                    painter->drawLine(xpos1 , upLine1, xpos2, upLine1 );
+                    painter->drawLine(xpos2, upLine1, xpos2, ypos2 );
+                }
+
+                if(ypos1>ypos2)
+                {
+                    painter->drawLine(xpos2, ypos2, xpos2 , upLine2);
+                    painter->drawLine(xpos2 , upLine2, xpos1, upLine2 );
+                    painter->drawLine(xpos1, upLine2, xpos1, ypos1 );
+                }
+                }
+
+                if((a[j]->Getorientation()==Bottom && neighbourContact->Getorientation()==Bottom))
+                {
+                if(ypos1<=ypos2)
+                {
+                    painter->drawLine(xpos2, ypos2, xpos2 , downLine2);
+                    painter->drawLine(xpos2 , downLine2, xpos1, downLine2 );
+                    painter->drawLine(xpos1, downLine2, xpos1, ypos1 );
+
+
+                }
+
+                if(ypos1>ypos2)
+                {
+                    painter->drawLine(xpos1, ypos1, xpos1 , downLine1);
+                    painter->drawLine(xpos1 , downLine1, xpos2, downLine1 );
+                    painter->drawLine(xpos2, downLine1, xpos2, ypos2 );
+                }
+                }
+
+                if((a[j]->Getorientation()==Bottom && neighbourContact->Getorientation()==Top))
+                {
+                if(ypos1<ypos2)
+                {
+                    painter->drawLine(xpos1, ypos1, xpos1, downLine1);
+                    painter->drawLine(xpos1, downLine1, xpos2, downLine1 );
+
+                    painter->drawLine(xpos2, downLine1, xpos2, ypos2 );
+
+
+                }
+
+                if(ypos1>=ypos2)
+                {
+                    painter->drawLine(xpos1, ypos1, xpos1, downLine1 );
+                    painter->drawLine(xpos1, downLine1, rightDefaultX ,ypos1 + 0.5*MainElement::GetStepGrid() );
+
+                    painter->drawLine(rightDefaultX ,downLine1 ,rightDefaultX , upLine2 );
+                    painter->drawLine(rightDefaultX , upLine2, xpos2, upLine2 );
+                    painter->drawLine(xpos2, upLine2 ,xpos2,ypos2);
+                }
+                }
+
+                if((a[j]->Getorientation()==Top && neighbourContact->Getorientation()==Bottom))
+                {
+                if(ypos1<ypos2)
+                {
+
+
+                    painter->drawLine(xpos1, ypos1, xpos1, upLine1 );
+                    painter->drawLine(xpos1, upLine1, rightDefaultX ,upLine1 );
+
+                    painter->drawLine(rightDefaultX ,upLine1 ,rightDefaultX , downLine2 );
+                    painter->drawLine(rightDefaultX , downLine2, xpos2, downLine2);
+                    painter->drawLine(xpos2, downLine2 ,xpos2,ypos2);
+
+
+                }
+
+                if(ypos1>=ypos2)
+                {
+                    painter->drawLine(xpos1, ypos1, xpos1, upLine1);
+                    painter->drawLine(xpos1, upLine1, xpos2, upLine1);
+
+                    painter->drawLine(xpos2, upLine1, xpos2, ypos2 );
+                }
+                }
+
+                if((a[j]->Getorientation()==Top && neighbourContact->Getorientation()==Left))
+                {
+                    painter->drawLine(xpos1,ypos1, xpos1, upLine1);
+                    painter->drawLine(xpos1, upLine1, leftLine2, upLine1 );
+                    painter->drawLine(leftLine2, upLine1  , leftLine2, ypos2 );
+                    painter->drawLine(leftLine2, ypos2  , xpos2, ypos2 );
+
+                }
+
+                if((a[j]->Getorientation()==Left && neighbourContact->Getorientation()==Top))
+                {
+                    painter->drawLine(xpos1,ypos1, leftLine1, ypos1);
+                    painter->drawLine(leftLine1, ypos1, leftLine1, upLine2 );
+                    painter->drawLine(leftLine1, upLine2 , xpos2, upLine2 );
+                    painter->drawLine(xpos2, upLine2 , xpos2, ypos2 );
+
+                }
+
+                if((a[j]->Getorientation()==Top && neighbourContact->Getorientation()==Right))
+                {
+                    painter->drawLine(xpos1,ypos1, xpos1, upLine1);
+                    painter->drawLine(xpos1, upLine1, rightLine2, upLine1 );
+                    painter->drawLine(rightLine2, upLine1  , rightLine2, ypos2 );
+                    painter->drawLine(rightLine2, ypos2  , xpos2, ypos2 );
+
+                }
+
+                if((a[j]->Getorientation()==Right && neighbourContact->Getorientation()==Top))
+                {
+                    painter->drawLine(xpos1,ypos1, rightLine1, ypos1);
+                    painter->drawLine(rightLine1, ypos1, rightLine1, upLine2 );
+                    painter->drawLine(rightLine1, upLine2 , xpos2, upLine2 );
+                    painter->drawLine(xpos2, upLine2 , xpos2, ypos2 );
+
+                }
+
+                if((a[j]->Getorientation()==Bottom && neighbourContact->Getorientation()==Left))
+                {
+                    painter->drawLine(xpos1,ypos1, xpos1, downLine1);
+                    painter->drawLine(xpos1, downLine1, leftLine2, downLine1 );
+                    painter->drawLine(leftLine2, downLine1  , leftLine2, ypos2 );
+                    painter->drawLine(leftLine2, ypos2  , xpos2, ypos2 );
+
+                }
+
+                if((a[j]->Getorientation()==Left && neighbourContact->Getorientation()==Bottom))
+                {
+                    painter->drawLine(xpos1,ypos1, leftLine1, ypos1);
+                    painter->drawLine(leftLine1, ypos1, leftLine1, downLine2 );
+                    painter->drawLine(leftLine1, downLine2 , xpos2, downLine2 );
+                    painter->drawLine(xpos2, downLine2 , xpos2, ypos2 );
+
+                }
+
+                if((a[j]->Getorientation()==Bottom && neighbourContact->Getorientation()==Right))
+                {
+                    painter->drawLine(xpos1,ypos1, xpos1, downLine1);
+                    painter->drawLine(xpos1, downLine1, rightLine2, downLine1 );
+                    painter->drawLine(rightLine2, downLine1  , rightLine2, ypos2 );
+                    painter->drawLine(rightLine2, ypos2  , xpos2, ypos2 );
+
+                }
+
+                if((a[j]->Getorientation()==Right && neighbourContact->Getorientation()==Bottom))
+                {
+                    painter->drawLine(xpos1,ypos1, rightLine1, ypos1);
+                    painter->drawLine(rightLine1, ypos1, rightLine1, downLine2 );
+                    painter->drawLine(rightLine1, downLine2 , xpos2, downLine2 );
+                    painter->drawLine(xpos2, downLine2 , xpos2, ypos2 );
+
+                }
+
+
+
+                neighbourContact->setIsDrawedConnection(true);
+        }
+    }
+}
+
+}
 
 void Scene::AddBlock()
 {
     arrElement.append(new BlockRelay());
     arrElement.last()->setVisible(true);
     this->addItem(arrElement.last());
+
+    bool fl = true;
+    while(fl)
+    {
+        fl=false;
+    for(int i=0;i<arrElement.size()-1;i++)
+    {
+        if(arrElement[i]->pos()==arrElement.last()->pos())
+        {
+            arrElement.last()->moveBy(dynamic_cast<MainElement*>(arrElement[i])->getSizeX()*MainElement::GetStepGrid(), 0);
+            fl=true;
+
+        }
+    }
+    }
+
+
+
+
     nElement++;
 
 }
