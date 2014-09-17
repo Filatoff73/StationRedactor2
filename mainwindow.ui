@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>362</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -69,6 +69,13 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QPushButton" name="greedButton">
+           <property name="text">
+            <string>Изменить шаг сетки</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>
@@ -89,6 +96,34 @@
           <widget class="QPushButton" name="addBlock">
            <property name="text">
             <string>Добавить блок</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="addPoint">
+           <property name="text">
+            <string>Добавить точку</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="addPolus">
+           <property name="text">
+            <string>Добавить полюс</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="addRelay">
+           <property name="text">
+            <string>Добавить реле</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="addContactRelay">
+           <property name="text">
+            <string>Добавить контакт реле</string>
            </property>
           </widget>
          </item>

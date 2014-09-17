@@ -22,10 +22,9 @@ public:
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    void SetPositionContact(QPoint& a)
-    {
-        positionContact=a;
-    }
+   // QRectF boundingRect() const ;
+
+    void SetPositionContact(QPoint a);
 
      QPoint GetPositionContact()
     {
@@ -107,6 +106,9 @@ public:
 
     bool getIsDrawedConnection() const;
     void setIsDrawedConnection(bool value);
+
+    int getNum() const;
+    void setNum(int value);
 
 private:
 

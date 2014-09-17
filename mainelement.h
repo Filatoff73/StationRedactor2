@@ -14,6 +14,7 @@
 #include <QObject>
 #define SCALE 1.1
 
+class RelayContact;
 class MainElement : public QGraphicsObject
 {
 
@@ -27,18 +28,20 @@ public:
 
     void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
 
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
     void SetContact();
 
-    void ReDrawContact();
+    virtual void ReDrawContact();
 
     QVector<Contacts*>& GetArrContacts()
     {
         return arrContacts;
     }
 
-    bool CreateDialog(void);
+    bool CreateDialog(QString s="Удалить линию соединения?");
 
     static void InitConstans();
 
@@ -65,6 +68,18 @@ public:
     static int getWidthLinesContacts();
     static void setWidthLinesContacts(int value);
 
+    static void SetStepGrid(int a)
+    {
+        if(a>1)
+        STEP_GRID=a;
+    }
+
+    int getIdElement() const;
+    void setIdElement(int value);
+
+    QString getNameElement() const;
+    void setNameElement(const QString &value);
+
 protected:
     static int STEP_GRID;
     static int rad;
@@ -88,6 +103,9 @@ protected:
 
     QVector<Contacts*> arrContacts;        
     QDialog* question;
+
+    static bool isSelectRelayMode;
+    static RelayContact* relayContactSelected;
 
 
 

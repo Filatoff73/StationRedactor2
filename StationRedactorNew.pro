@@ -18,13 +18,21 @@ SOURCES += main.cpp\
     mainelement.cpp \
     blockrelay.cpp \
     view.cpp \
-    contacts.cpp
+    contacts.cpp \
+    chainpoint.cpp \
+    chainpolus.cpp \
+    relayrelay.cpp \
+    relaycontact.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
     mainelement.h \
     blockrelay.h \
     view.h \
-    contacts.h
+    contacts.h \
+    chainpoint.h \
+    chainpolus.h \
+    relayrelay.h \
+    relaycontact.h
 
 FORMS    += mainwindow.ui

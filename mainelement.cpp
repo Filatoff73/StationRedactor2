@@ -8,16 +8,25 @@
 #include <QLabel>
 #include <QPen>
 #include <blockrelay.h>
+#include <relayrelay.h>
+#include <relaycontact.h>
+#include <QErrorMessage>
+#include <QGraphicsView>
 
 int MainElement::STEP_GRID=0;
 int MainElement::rad=0;
+bool MainElement::isSelectRelayMode=false;
 int MainElement::widthLinesElements=2;
 int MainElement::widthLinesContacts=1;
+RelayContact* MainElement::relayContactSelected=NULL;
+
+
 
 MainElement::MainElement(QGraphicsObject* parent) : QGraphicsObject(parent)
 {
     isMirrorGorizontal=false;
     isMirrorVertical=false;
+    idElement=0;
 
     setAcceptDrops(true);
     setFlag(QGraphicsItem::ItemIsSelectable);
@@ -26,19 +35,14 @@ MainElement::MainElement(QGraphicsObject* parent) : QGraphicsObject(parent)
 
     question = new QDialog;
 
-
-
-
-
-
-
+    isSelectRelayMode=false;
+    relayContactSelected=NULL;
 
 
 }
 
 void MainElement::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->drawText(sizeX/2.0*STEP_GRID, sizeY/2.0*STEP_GRID, nameElement);
 
     painter->setRenderHint(QPainter::Antialiasing);
 
@@ -76,7 +80,43 @@ void MainElement::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 }
 
-bool MainElement::CreateDialog()
+void MainElement::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if(isSelectRelayMode && event->button() == Qt::LeftButton)
+    {
+
+        if(dynamic_cast<RelayRelay*>(this)!=NULL)
+        {
+            if(CreateDialog("Привязать контакт реле к реле?"))
+            {
+                relayContactSelected->setAssociatedRelay(dynamic_cast<RelayRelay*>(this));
+                relayContactSelected->setNameElement(this->getNameElement());
+                relayContactSelected->setIsLinked(true);
+
+            }
+
+        }
+        else
+        {
+            QErrorMessage mess(this->scene()->views().last()->cornerWidget());
+            mess.showMessage("Выбранный элемент не является реле, будет выполнен сброс команды.");
+
+            mess.exec();
+
+        }
+
+        relayContactSelected->setIsProcessLinked(false);
+        relayContactSelected=NULL;
+        isSelectRelayMode=false;
+
+        dynamic_cast<Scene*>(this->scene())->update();
+    }
+
+    QGraphicsItem::mousePressEvent(event);
+
+}
+
+bool MainElement::CreateDialog(QString s)
 {
     QPushButton okButton,cancelButton;
 
@@ -90,7 +130,7 @@ bool MainElement::CreateDialog()
 
     QLabel text;
 
-    text.setText("Удалить линию соединения?");
+    text.setText(s);
     layout.setDirection(QBoxLayout::BottomToTop);
     layout.addWidget(&text);
 
@@ -114,7 +154,7 @@ bool MainElement::CreateDialog()
 
 void MainElement::InitConstans()
 {
-    STEP_GRID = 60;
+    STEP_GRID = 30;
     rad = STEP_GRID*0.2;
 }
 
@@ -163,11 +203,24 @@ void MainElement::setWidthLinesContacts(int value)
 {
     widthLinesContacts = value;
 }
+int MainElement::getIdElement() const
+{
+    return idElement;
+}
 
+void MainElement::setIdElement(int value)
+{
+    idElement = value;
+}
+QString MainElement::getNameElement() const
+{
+    return nameElement;
+}
 
-
-
-
+void MainElement::setNameElement(const QString &value)
+{
+    nameElement = value;
+}
 
 
 
@@ -213,6 +266,7 @@ QVariant MainElement::itemChange(GraphicsItemChange change, const QVariant &valu
 
 void MainElement::SetContact()
 {
+    int k=0;
     for(int i=0;i<nContactsLeft;++i)
     {
             float interval = sizeY/(nContactsLeft+1.0);
@@ -220,12 +274,14 @@ void MainElement::SetContact()
             q.setX(0);
             q.setY(i*interval*STEP_GRID+interval*STEP_GRID);
 
-            arrContacts.append(new Contacts(q.x(), q.y(), rad, rad));
+            arrContacts.append(new Contacts(q.x()-rad/2.0, q.y()-rad/2.0, rad, rad));
+            arrContacts.last()->SetOrientation(Left);
             arrContacts.last()->SetPositionContact(q);
             //arrContacts.last()->pen().setColor(arrContacts.last()->GetColorContact());
             arrContacts.last()->setParentItem(this);
             arrContacts.last()->setVisible(true);
-            arrContacts.last()->SetOrientation(Left);
+            arrContacts.last()->setNum(k);
+            k++;
 
     }
 
@@ -238,12 +294,15 @@ void MainElement::SetContact()
             QPoint q;
             q.setX(i*interval*STEP_GRID+interval*STEP_GRID + 0.5*STEP_GRID);
             q.setY(sizeY*STEP_GRID);
-            arrContacts.append(new Contacts(q.x(), q.y(), rad, rad));
+            arrContacts.append(new Contacts(q.x()-rad/2.0, q.y()-rad/2.0, rad, rad));
+            arrContacts.last()->SetOrientation(Bottom);
             arrContacts.last()->SetPositionContact(q);
             //arrContacts.last()->pen().setColor(arrContacts.last()->GetColorContact());
             arrContacts.last()->setParentItem(this);
             arrContacts.last()->setVisible(true);
-            arrContacts.last()->SetOrientation(Bottom);
+
+            arrContacts.last()->setNum(k);
+            k++;
 
     }
 
@@ -255,12 +314,15 @@ void MainElement::SetContact()
             QPoint q;
             q.setX(sizeX*STEP_GRID);
             q.setY(i*interval*STEP_GRID+interval*STEP_GRID);
-            arrContacts.append(new Contacts(q.x(), q.y(), rad, rad));
+            arrContacts.append(new Contacts(q.x()-rad/2.0, q.y()-rad/2.0, rad, rad));
+            arrContacts.last()->SetOrientation(Right);
             arrContacts.last()->SetPositionContact(q);
             //arrContacts.last()->pen().setColor(arrContacts.last()->GetColorContact());
             arrContacts.last()->setParentItem(this);
             arrContacts.last()->setVisible(true);
-            arrContacts.last()->SetOrientation(Right);
+
+            arrContacts.last()->setNum(k);
+            k++;
 
 
 
@@ -274,14 +336,18 @@ void MainElement::SetContact()
             QPoint q;
             q.setX(i*interval*STEP_GRID+interval*STEP_GRID + 0.5*STEP_GRID);
             q.setY(0);
-            arrContacts.append(new Contacts(q.x(), q.y(), rad, rad));
+            arrContacts.append(new Contacts(q.x()-rad/2.0, q.y()-rad/2.0, rad, rad));
+            arrContacts.last()->SetOrientation(Top);
             arrContacts.last()->SetPositionContact(q);
             //arrContacts.last()->pen().setColor(arrContacts.last()->GetColorContact());
             arrContacts.last()->setParentItem(this);
             arrContacts.last()->setVisible(true);
-            arrContacts.last()->SetOrientation(Top);
+
+            arrContacts.last()->setNum(k);
+            k++;
 
     }
+
 
 
 
@@ -298,9 +364,10 @@ void MainElement::ReDrawContact()
             q.setX(0);
             q.setY(i*interval*STEP_GRID+interval*STEP_GRID);
 
-            arrContacts[k]->setRect(q.x(), q.y(), rad, rad);
+            arrContacts[k]->setRect(q.x()-rad/2.0, q.y()-rad/2.0, rad, rad);
             arrContacts[k]->SetOrientation(Left);
             arrContacts[k]->SetPositionContact(q);
+            arrContacts.last()->setNum(k);
             k++;
 
     }
@@ -314,9 +381,10 @@ void MainElement::ReDrawContact()
             QPoint q;
             q.setX(i*interval*STEP_GRID+interval*STEP_GRID + 0.5*STEP_GRID);
             q.setY(sizeY*STEP_GRID);
-            arrContacts[k]->setRect(q.x(), q.y(), rad, rad);
+            arrContacts[k]->setRect(q.x()-rad/2.0, q.y()-rad/2.0, rad, rad);
             arrContacts[k]->SetOrientation(Bottom);
             arrContacts[k]->SetPositionContact(q);
+            arrContacts.last()->setNum(k);
             k++;
 
     }
@@ -329,9 +397,10 @@ void MainElement::ReDrawContact()
             QPoint q;
             q.setX(sizeX*STEP_GRID);
             q.setY(i*interval*STEP_GRID+interval*STEP_GRID);
-            arrContacts[k]->setRect(q.x(), q.y(), rad, rad);
+            arrContacts[k]->setRect(q.x()-rad/2.0, q.y()-rad/2.0, rad, rad);
             arrContacts[k]->SetOrientation(Right);
             arrContacts[k]->SetPositionContact(q);
+            arrContacts.last()->setNum(k);
             k++;
 
 
@@ -346,9 +415,10 @@ void MainElement::ReDrawContact()
             QPoint q;
             q.setX(i*interval*STEP_GRID+interval*STEP_GRID + 0.5*STEP_GRID);
             q.setY(0);
-            arrContacts[k]->setRect(q.x(), q.y(), rad, rad);
+            arrContacts[k]->setRect(q.x()-rad/2.0, q.y()-rad/2.0, rad, rad);
             arrContacts[k]->SetOrientation(Top);
             arrContacts[k]->SetPositionContact(q);
+            arrContacts.last()->setNum(k);
             k++;
 
     }

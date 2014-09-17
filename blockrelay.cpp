@@ -6,13 +6,12 @@
 #include <QPen>
 
 
-int BlockRelay::SiezeBlockX=3;
-int BlockRelay::SiezeBlockY=3;
+int BlockRelay::SiezeBlockX=4;
+int BlockRelay::SiezeBlockY=6;
 
 BlockRelay::BlockRelay(QGraphicsObject* parent) : MainElement(parent)
 {
     nameElement = "BlockRelay";
-    idElement=1;
 
      nContactsLeft=2;
      nContactsRight=3;
@@ -49,6 +48,7 @@ void BlockRelay::contextMenuEvent( QGraphicsSceneContextMenuEvent * event )
             nContactsLeft=nContactsRight;
             nContactsRight=temp;
             ReDrawContact();
+            dynamic_cast<Scene*>(this->scene())->update();
         }
 
         if(!txt.compare("Отразить по горизонтали"))
@@ -59,6 +59,7 @@ void BlockRelay::contextMenuEvent( QGraphicsSceneContextMenuEvent * event )
             nContactsUp=nContactsDown;
             nContactsDown=temp;
             ReDrawContact();
+            dynamic_cast<Scene*>(this->scene())->update();
 
         }
 
@@ -66,6 +67,7 @@ void BlockRelay::contextMenuEvent( QGraphicsSceneContextMenuEvent * event )
         {
             dynamic_cast<Scene*>(this->scene())->DeleteElement(this);
         }
+
 
     }
 
@@ -95,6 +97,7 @@ void BlockRelay::setSiezeBlockY(int value)
 void BlockRelay::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 
+    painter->drawText(sizeX/2.0*STEP_GRID, sizeY/2.0*STEP_GRID, nameElement);
     MainElement::paint(painter, option, widget);
 
 
@@ -129,11 +132,5 @@ void BlockRelay::DrawBlock(QPainter* painter)
 {
     painter->drawRect(1, 1, (sizeX)*STEP_GRID-2, (sizeY)*STEP_GRID-2 );
 
-    //QFont font = &GetFont();
-   // painter->setFont(GetFont());
-
-    //painter->drawText(this->size().height()/2, this->size().width()/2, nameBlock);
-
-   // SetContact();
 
 }

@@ -29,6 +29,14 @@ public:
 
     void AddBlock();
 
+    void AddPoint();
+
+    void AddPolus();
+
+    void AddRelayContact();
+
+    void AddRelay();
+
     void DeleteElement(MainElement* element);
 
     int GetDrawContactLine()
@@ -51,6 +59,7 @@ public:
     void DeleteConnectionLine();
     bool ChangeSiezeBlocks(QString s);
     bool ChangeDifferentParametrs(QString s);
+    QString SetStringParamElementDialog(QString s);
 
 
     QVector<MainElement *> getArrElement() const;

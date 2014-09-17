@@ -24,11 +24,17 @@ private:
 
 private slots:
     void AddBlockButton();
+    void AddPointButton();
+    void AddPolus();
+    void AddRelay();
+    void AddRelayContact();
     void DeleteConnection();
     void WidthLines();
     void WidthLinesContacts();
     void SiezeBlocks();
     void RadContacts();
+    void GreedButton();
+
 };
 
 #endif // MAINWINDOW_H

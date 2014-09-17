@@ -2,7 +2,10 @@
 #include <cmath>
 #include <QGraphicsView>
 #include "blockrelay.h"
-
+#include "chainpoint.h"
+#include "chainpolus.h"
+#include "relayrelay.h"
+#include "relaycontact.h"
 #include <QPushButton>
 #include <QLabel>
 #include <QTextEdit>
@@ -87,7 +90,6 @@ void Scene::DeleteConnectionLine()
 }
 
 
-
 bool Scene::ChangeDifferentParametrs(QString s)
 {
     int parametr=0;
@@ -105,6 +107,14 @@ bool Scene::ChangeDifferentParametrs(QString s)
     {
         parametr=MainElement::getWidthLinesContacts();
     }
+
+    if(!s.compare("Задайте шаг сетки"))
+    {
+        parametr=MainElement::GetStepGrid();
+    }
+
+
+
 
     QPushButton okButton,cancelButton;
 
@@ -167,6 +177,15 @@ bool Scene::ChangeDifferentParametrs(QString s)
                 MainElement::setWidthLinesContacts(parametr);
             }
 
+            if(!s.compare("Задайте шаг сетки") && parametr!=0)
+            {
+                MainElement::SetStepGrid(parametr);
+                for(int i=0; i<arrElement.size();i++)
+                {
+                    arrElement[i]->ReDrawContact();
+                }
+            }
+
          }
 
          return true;
@@ -177,6 +196,52 @@ bool Scene::ChangeDifferentParametrs(QString s)
           return false;
      }
 }
+
+QString Scene::SetStringParamElementDialog(QString s)
+{
+    QPushButton okButton;
+
+    okButton.setText(tr("OK"));
+
+    QVBoxLayout layout;
+
+
+
+     question->setLayout(&layout);
+
+
+         QHBoxLayout layoutText1;
+         QLabel text1;
+         text1.setText("Введите имя элемента");
+         QTextEdit parametrText;
+         parametrText.setMaximumHeight(30);
+         parametrText.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+         parametrText.setText(s);
+         layoutText1.addWidget(&text1);
+         layoutText1.addWidget(&parametrText);
+
+
+     layout.addLayout(&layoutText1);
+     layout.addWidget(&okButton);
+
+     question->setLayout(&layout);
+
+     QObject::connect(&okButton, SIGNAL(clicked()), question, SLOT(accept()));
+     question->setVisible(true);
+     question->show();
+     question->exec();
+
+     if(question->result() == QDialog::Accepted)
+     {
+         return parametrText.toPlainText();
+     }
+
+     return "";
+
+
+
+}
+
 QVector<MainElement *> Scene::getArrElement() const
 {
     return arrElement;
@@ -602,6 +667,7 @@ void Scene::AddBlock()
     arrElement.append(new BlockRelay());
     arrElement.last()->setVisible(true);
     this->addItem(arrElement.last());
+    arrElement.last()->moveBy(MainElement::GetStepGrid(),MainElement::GetStepGrid());
 
     bool fl = true;
     while(fl)
@@ -611,7 +677,7 @@ void Scene::AddBlock()
     {
         if(arrElement[i]->pos()==arrElement.last()->pos())
         {
-            arrElement.last()->moveBy(dynamic_cast<MainElement*>(arrElement[i])->getSizeX()*MainElement::GetStepGrid(), 0);
+            arrElement.last()->moveBy(dynamic_cast<MainElement*>(arrElement[i])->getSizeX()*MainElement::GetStepGrid()+MainElement::GetStepGrid(), 0);
             fl=true;
 
         }
@@ -625,9 +691,135 @@ void Scene::AddBlock()
 
 }
 
+void Scene::AddPoint()
+{
+    arrElement.append(new ChainPoint());
+    arrElement.last()->setVisible(true);
+    this->addItem(arrElement.last());
+    arrElement.last()->moveBy(MainElement::GetStepGrid(),MainElement::GetStepGrid());
+
+    bool fl = true;
+    while(fl)
+    {
+        fl=false;
+    for(int i=0;i<arrElement.size()-1;i++)
+    {
+        if(arrElement[i]->pos()==arrElement.last()->pos())
+        {
+            arrElement.last()->moveBy(dynamic_cast<MainElement*>(arrElement[i])->getSizeX()*MainElement::GetStepGrid()+MainElement::GetStepGrid(), 0);
+            fl=true;
+
+        }
+    }
+    }
+
+
+
+
+    nElement++;
+}
+
+void Scene::AddPolus()
+{
+    arrElement.append(new ChainPolus());
+    arrElement.last()->setVisible(true);
+    this->addItem(arrElement.last());
+    arrElement.last()->moveBy(MainElement::GetStepGrid(),MainElement::GetStepGrid());
+
+    bool fl = true;
+    while(fl)
+    {
+        fl=false;
+    for(int i=0;i<arrElement.size()-1;i++)
+    {
+        if(arrElement[i]->pos()==arrElement.last()->pos())
+        {
+            arrElement.last()->moveBy(dynamic_cast<MainElement*>(arrElement[i])->getSizeX()*MainElement::GetStepGrid()+MainElement::GetStepGrid(), 0);
+            fl=true;
+
+        }
+    }
+    }
+
+
+arrElement.last()->setNameElement(SetStringParamElementDialog(arrElement.last()->getNameElement()));
+
+
+    nElement++;
+}
+
+void Scene::AddRelayContact()
+{
+    arrElement.append(new RelayContact());
+    arrElement.last()->setVisible(true);
+    this->addItem(arrElement.last());
+
+    arrElement.last()->moveBy(MainElement::GetStepGrid(),MainElement::GetStepGrid());
+
+    bool fl = true;
+    while(fl)
+    {
+        fl=false;
+    for(int i=0;i<arrElement.size()-1;i++)
+    {
+        if(arrElement[i]->pos()==arrElement.last()->pos())
+        {
+            arrElement.last()->moveBy(dynamic_cast<MainElement*>(arrElement[i])->getSizeX()*MainElement::GetStepGrid()+MainElement::GetStepGrid(), 0);
+            fl=true;
+
+        }
+    }
+    }
+
+arrElement.last()->setNameElement(SetStringParamElementDialog(arrElement.last()->getNameElement()));
+
+    nElement++;
+}
+
+void Scene::AddRelay()
+{
+    arrElement.append(new RelayRelay());
+    arrElement.last()->setVisible(true);
+    this->addItem(arrElement.last());
+    arrElement.last()->moveBy(MainElement::GetStepGrid(),MainElement::GetStepGrid());
+
+    bool fl = true;
+    while(fl)
+    {
+        fl=false;
+    for(int i=0;i<arrElement.size()-1;i++)
+    {
+        if(arrElement[i]->pos()==arrElement.last()->pos())
+        {
+            arrElement.last()->moveBy(dynamic_cast<MainElement*>(arrElement[i])->getSizeX()*MainElement::GetStepGrid()+MainElement::GetStepGrid(), 0);
+            fl=true;
+
+        }
+    }
+    }
+
+arrElement.last()->setNameElement(SetStringParamElementDialog(arrElement.last()->getNameElement()));
+
+
+    nElement++;
+
+}
+
 
 void Scene::DeleteElement(MainElement* element)
 {
+
+    if(dynamic_cast<RelayRelay*>(element)!=NULL )
+    {
+        for(int i1=0;i1<arrElement.size();i1++)
+        {
+            if(dynamic_cast<RelayContact*>(arrElement[i1])!=NULL && dynamic_cast<RelayContact*>(arrElement[i1])->getAssociatedRelay()==element)
+            {
+                dynamic_cast<RelayContact*>(arrElement[i1])->RemoveAssociatedRelay();
+            }
+        }
+    }
+
     for(int i=0;i<arrElement.size();i++)
     {
         if(arrElement[i]==element)

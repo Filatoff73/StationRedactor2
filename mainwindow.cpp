@@ -28,17 +28,42 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     connect(ui->addBlock, SIGNAL(clicked()), this, SLOT(AddBlockButton()));
+    connect(ui->addPoint, SIGNAL(clicked()), this, SLOT(AddPointButton()));
+    connect(ui->addPolus, SIGNAL(clicked()), this, SLOT(AddPolus()));
+    connect(ui->addRelay, SIGNAL(clicked()), this, SLOT(AddRelay()));
+    connect(ui->addContactRelay, SIGNAL(clicked()), this, SLOT(AddRelayContact()));
     connect(ui->deleteConnection, SIGNAL(clicked()), this, SLOT(DeleteConnection()));
     connect(ui->widthLines, SIGNAL(clicked()), this, SLOT(WidthLines()));
     connect(ui->siezeBlocks, SIGNAL(clicked()), this, SLOT(SiezeBlocks()));
     connect(ui->rContact, SIGNAL(clicked()), this, SLOT(RadContacts()));
     connect(ui->widthLineContatcts, SIGNAL(clicked()), this, SLOT(WidthLinesContacts()));
+    connect(ui->greedButton, SIGNAL(clicked()), this, SLOT(GreedButton()));
 }
 
 
 void MainWindow::AddBlockButton()
 {
     scene->AddBlock();
+}
+
+void MainWindow::AddPointButton()
+{
+    scene->AddPoint();
+}
+
+void MainWindow::AddPolus()
+{
+    scene->AddPolus();
+}
+
+void MainWindow::AddRelay()
+{
+    scene->AddRelay();
+}
+
+void MainWindow::AddRelayContact()
+{
+    scene->AddRelayContact();
 }
 
 void MainWindow::DeleteConnection()
@@ -65,6 +90,11 @@ void MainWindow::SiezeBlocks()
 void MainWindow::RadContacts()
 {
     scene->ChangeDifferentParametrs("Задайте радиус контакта");
+}
+
+void MainWindow::GreedButton()
+{
+    scene->ChangeDifferentParametrs("Задайте шаг сетки");
 }
 
 

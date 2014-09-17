@@ -5,6 +5,7 @@
 #include <QMouseEvent>
 #include <QWheelEvent>
 #include <QAbstractScrollArea>
+#include <QKeyEvent>
 
 class View : public QGraphicsView
 {
@@ -13,6 +14,11 @@ public:
     explicit View(QGraphicsView* parent=0);
 
     void wheelEvent(QWheelEvent* event);
+
+    void keyPressEvent(QKeyEvent *event);
+
+private:
+    double stepSlider;
 
 };
 
