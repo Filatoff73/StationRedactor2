@@ -17,6 +17,8 @@ public:
 
     void keyPressEvent(QKeyEvent *event);
 
+    void InitViewVariable();
+
 private:
     double stepSlider;
 

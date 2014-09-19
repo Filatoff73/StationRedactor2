@@ -10,6 +10,7 @@ RelayRelay::RelayRelay(QGraphicsObject* parent) : MainElement(parent)
 {
 
     nameElement = "";
+    typeElement = TYPE_RELAY_RELAY;
 
      nContactsLeft=1;
      nContactsRight=1;
@@ -27,6 +28,19 @@ RelayRelay::RelayRelay(QGraphicsObject* parent) : MainElement(parent)
      isVoltage=false;
 
 }
+
+RelayRelay::RelayRelay(int idElement, int posX, int posY, bool isMirrorGorizontal, bool isMirrorVertical, int sizeX, int sizeY, int nContactsLeft,int nContactsDown,int nContactsRight,int nContactsUp, QString name, QGraphicsObject* parent):
+     MainElement( idElement,  posX,  posY,  isMirrorGorizontal,  isMirrorVertical,  sizeX,  sizeY,  nContactsLeft, nContactsDown, nContactsRight, nContactsUp,  name, parent)
+{
+    typeElement = TYPE_RELAY_RELAY;
+    SetContact();
+
+    delay=0;
+    isVoltage=false;
+}
+
+
+
 
 RelayRelay::~RelayRelay()
 {
@@ -143,6 +157,31 @@ int RelayRelay::getDelay() const
 void RelayRelay::setDelay(int value)
 {
     delay = value;
+}
+
+void RelayRelay::SaveToXml(QXmlStreamWriter &writer)
+{
+    writer.writeStartElement("Element");
+    SaveBaseElementParametrs(writer);//атрибуты
+
+    writer.writeStartElement("Parametrs");
+
+    writer.writeAttribute("isVoltage", QString::number(isVoltage));
+    writer.writeAttribute("delay", QString::number(delay));
+
+    writer.writeEndElement();//parametrs
+
+    writer.writeStartElement("Contacts");
+
+    for(int i=0;i<arrContacts.size();i++)
+    {
+        arrContacts[i]->WriteToXmlContacts(writer);
+    }
+
+    writer.writeEndElement();//contacts
+
+
+    writer.writeEndElement();//element
 }
 
 

@@ -17,13 +17,19 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void save();
+    void saveAs();
+    void open();
+
 private:
     Ui::MainWindow *ui;
     Scene* scene;
     View* view;
+    QString saveDir;
 
 private slots:
-    void AddBlockButton();
+    void AddTestBlockButton();
+    void AddFileBlockButton();
     void AddPointButton();
     void AddPolus();
     void AddRelay();
@@ -31,9 +37,11 @@ private slots:
     void DeleteConnection();
     void WidthLines();
     void WidthLinesContacts();
-    void SiezeBlocks();
+    //void SiezeBlocks();
     void RadContacts();
     void GreedButton();
+
+    void MenuBarFunc(QAction *act);
 
 };
 

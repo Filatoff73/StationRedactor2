@@ -8,6 +8,8 @@ class RelayRelay : public MainElement
 {
 public:
     RelayRelay(QGraphicsObject* parent=0);
+    RelayRelay(int idElement, int posX, int posY, bool isMirrorGorizontal, bool isMirrorVertical, int sizeX, int sizeY, int nContactsLeft,int nContactsDown,int nContactsRight,int nContactsUp,QString name, QGraphicsObject* parent=0);
+
     ~RelayRelay();
 
     void paint ( QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget);
@@ -19,6 +21,7 @@ public:
 
     int getDelay() const;
     void setDelay(int value);
+    void SaveToXml(QXmlStreamWriter& writer);
 
 private:
 

@@ -5,6 +5,7 @@
 ChainPolus::ChainPolus(QGraphicsObject* parent) : MainElement(parent)
 {
      nameElement = "";
+     typeElement = TYPE_CHAIN_POLUS;
      nContactsLeft=1;
      nContactsRight=0;
      nContactsUp=0;
@@ -17,6 +18,13 @@ ChainPolus::ChainPolus(QGraphicsObject* parent) : MainElement(parent)
 
      SetContact();
 
+}
+
+ChainPolus::ChainPolus(int idElement, int posX, int posY, bool isMirrorGorizontal, bool isMirrorVertical, int sizeX, int sizeY, int nContactsLeft,int nContactsDown,int nContactsRight,int nContactsUp, QString name, QGraphicsObject* parent):
+     MainElement( idElement,  posX,  posY,  isMirrorGorizontal,  isMirrorVertical,  sizeX,  sizeY,  nContactsLeft, nContactsDown, nContactsRight, nContactsUp,  name, parent)
+{
+    typeElement = TYPE_CHAIN_POLUS;
+        SetContact();
 }
 
 void ChainPolus::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -145,4 +153,21 @@ void ChainPolus::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 
     }
+}
+
+void ChainPolus::SaveToXml(QXmlStreamWriter &writer)
+{
+    writer.writeStartElement("Element");
+    SaveBaseElementParametrs(writer);//атрибуты
+    writer.writeStartElement("Contacts");
+
+    for(int i=0;i<arrContacts.size();i++)
+    {
+        arrContacts[i]->WriteToXmlContacts(writer);
+    }
+
+    writer.writeEndElement();//contacts
+
+
+    writer.writeEndElement();//element
 }

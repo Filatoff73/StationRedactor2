@@ -3,15 +3,15 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include "scene.h"
+#include "view.h"
 #include <QPen>
+#include <QInputDialog>
 
-
-int BlockRelay::SiezeBlockX=4;
-int BlockRelay::SiezeBlockY=6;
 
 BlockRelay::BlockRelay(QGraphicsObject* parent) : MainElement(parent)
 {
     nameElement = "BlockRelay";
+    typeElement = TYPE_BLOCK_RELAY;
 
      nContactsLeft=2;
      nContactsRight=3;
@@ -20,19 +20,28 @@ BlockRelay::BlockRelay(QGraphicsObject* parent) : MainElement(parent)
 
      nContacts = nContactsDown + nContactsUp + nContactsLeft + nContactsRight;
 
-     sizeX=SiezeBlockX;
-     sizeY=SiezeBlockY;
+     sizeX=4;
+     sizeY=6;
 
      SetContact();
 
 }
 
 
+BlockRelay::BlockRelay(int idElement, int posX, int posY, bool isMirrorGorizontal, bool isMirrorVertical, int sizeX, int sizeY, int nContactsLeft,int nContactsDown,int nContactsRight,int nContactsUp, QString name, QGraphicsObject* parent):
+     MainElement( idElement,  posX,  posY,  isMirrorGorizontal,  isMirrorVertical,  sizeX,  sizeY,  nContactsLeft, nContactsDown, nContactsRight, nContactsUp,  name, parent)
+{
+    typeElement = TYPE_BLOCK_RELAY;
+    SetContact();
+}
+
 void BlockRelay::contextMenuEvent( QGraphicsSceneContextMenuEvent * event )
 {
     QMenu myMenu;
     myMenu.addAction("Отразить по вертикали");
     myMenu.addAction("Отразить по горизонтали");
+    myMenu.addAction("Изменить размер по Ох");
+    myMenu.addAction("Изменить размер по Оу");
     myMenu.addAction("Удалить элемент");
 
     QAction* selectedItem = myMenu.exec(event->screenPos());
@@ -63,6 +72,48 @@ void BlockRelay::contextMenuEvent( QGraphicsSceneContextMenuEvent * event )
 
         }
 
+        if(!txt.compare("Изменить размер по Ох"))
+        {
+            bool ok;
+            QString text = QInputDialog::getText(this->scene()->views().last()->cornerWidget(), tr(""),
+                                              tr("Размер по Ox"), QLineEdit::Normal,
+                                              QString::number(sizeX), &ok);
+
+            if (ok && !text.isEmpty() )
+            {
+                bool ok1;
+                text.toInt(&ok1);
+                if(ok1)
+                {
+                    sizeX = text.toInt();
+                }
+            }
+            ReDrawContact();
+            dynamic_cast<Scene*>(this->scene())->update();
+
+        }
+
+        if(!txt.compare("Изменить размер по Оу"))
+        {
+            bool ok;
+            QString text = QInputDialog::getText(this->scene()->views().last()->cornerWidget(), tr(""),
+                                              tr("Размер по Oу"), QLineEdit::Normal,
+                                              QString::number(sizeY), &ok);
+
+            if (ok && !text.isEmpty() )
+            {
+                bool ok1;
+                text.toInt(&ok1);
+                if(ok1)
+                {
+                    sizeY = text.toInt();
+                }
+            }
+            ReDrawContact();
+            dynamic_cast<Scene*>(this->scene())->update();
+
+        }
+
         if(!txt.compare("Удалить элемент"))
         {
             dynamic_cast<Scene*>(this->scene())->DeleteElement(this);
@@ -72,24 +123,24 @@ void BlockRelay::contextMenuEvent( QGraphicsSceneContextMenuEvent * event )
     }
 
 }
-int BlockRelay::getSiezeBlockX()
+
+void BlockRelay::SaveToXml(QXmlStreamWriter &writer)
 {
-    return SiezeBlockX;
+    writer.writeStartElement("Element");
+    SaveBaseElementParametrs(writer);//атрибуты
+    writer.writeStartElement("Contacts");
+
+    for(int i=0;i<arrContacts.size();i++)
+    {
+        arrContacts[i]->WriteToXmlContacts(writer);
+    }
+
+    writer.writeEndElement();//contacts
+
+
+    writer.writeEndElement();//element
 }
 
-void BlockRelay::setSiezeBlockX(int value)
-{
-    SiezeBlockX = value;
-}
-int BlockRelay::getSiezeBlockY()
-{
-    return SiezeBlockY;
-}
-
-void BlockRelay::setSiezeBlockY(int value)
-{
-    SiezeBlockY = value;
-}
 
 
 
@@ -97,7 +148,7 @@ void BlockRelay::setSiezeBlockY(int value)
 void BlockRelay::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 
-    painter->drawText(sizeX/2.0*STEP_GRID, sizeY/2.0*STEP_GRID, nameElement);
+    painter->drawText(sizeX/2.0*STEP_GRID - nameElement.length()*sizeX/2.0, sizeY/2.0*STEP_GRID, nameElement);
     MainElement::paint(painter, option, widget);
 
 

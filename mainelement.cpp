@@ -41,6 +41,35 @@ MainElement::MainElement(QGraphicsObject* parent) : QGraphicsObject(parent)
 
 }
 
+MainElement::MainElement(int idElement, int posX, int posY, bool isMirrorGorizontal, bool isMirrorVertical, int sizeX, int sizeY, int nContactsLeft,int nContactsDown,int nContactsRight,int nContactsUp,QString name, QGraphicsObject* parent): QGraphicsObject(parent)
+{
+    MainElement::idElement=idElement;
+    MainElement::isMirrorGorizontal=isMirrorGorizontal;
+    MainElement::isMirrorVertical=isMirrorVertical;
+    MainElement::sizeX=sizeX;
+    MainElement::sizeY=sizeY;
+    MainElement::nContactsLeft=nContactsLeft;
+    MainElement::nContactsRight=nContactsRight;
+    MainElement::nContactsDown=nContactsDown;
+    MainElement::nContactsUp=nContactsUp;
+    MainElement::nameElement=name;
+    this->setPos(posX, posY);
+
+    setAcceptDrops(true);
+    setFlag(QGraphicsItem::ItemIsSelectable);
+    setFlag(QGraphicsItem::ItemIsMovable);
+    setFlag(QGraphicsItem::ItemSendsGeometryChanges);
+
+    question = new QDialog;
+
+    isSelectRelayMode=false;
+    relayContactSelected=NULL;
+    nContacts = nContactsDown + nContactsUp + nContactsLeft + nContactsRight;
+}
+
+
+
+
 void MainElement::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 
@@ -220,6 +249,36 @@ QString MainElement::getNameElement() const
 void MainElement::setNameElement(const QString &value)
 {
     nameElement = value;
+}
+
+void MainElement::SaveBaseElementParametrs(QXmlStreamWriter &writer)
+{
+    writer.writeAttribute("typeElement",  QString::number(typeElement));
+    writer.writeAttribute("idElement", QString::number(idElement));
+
+    writer.writeAttribute("posX", QString::number(this->pos().x()));
+    writer.writeAttribute("posY", QString::number(this->pos().y()));
+    writer.writeAttribute("isMirrorGorizontal", QString::number(isMirrorGorizontal));
+    writer.writeAttribute("isMirrorVertical", QString::number(isMirrorVertical));
+
+    writer.writeAttribute("sizeX", QString::number(sizeX));
+    writer.writeAttribute("sizeY", QString::number(sizeY));
+
+    writer.writeAttribute("nContactsLeft", QString::number(nContactsLeft));
+    writer.writeAttribute("nContactsDown", QString::number(nContactsDown));
+    writer.writeAttribute("nContactsRight", QString::number(nContactsRight));
+    writer.writeAttribute("nContactsUp", QString::number(nContactsUp));
+    writer.writeAttribute("name", nameElement);
+}
+
+Contacts *MainElement::findContactByNum(int num)
+{
+    for(int i=0;i<arrContacts.size();i++)
+    {
+        if(arrContacts[i]->getNum()==num)
+            return arrContacts[i];
+    }
+    return NULL;
 }
 
 

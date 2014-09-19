@@ -4,6 +4,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QPen>
+#include <qxmlstream.h>
 
 enum Orientation
 {
@@ -104,11 +105,18 @@ public:
 
 
 
+
     bool getIsDrawedConnection() const;
     void setIsDrawedConnection(bool value);
 
     int getNum() const;
     void setNum(int value);
+
+    void WriteToXmlContacts(QXmlStreamWriter &writer);
+
+    QString getNameContact() const;
+    void setNameContact(const QString &value);
+
 
 private:
 
@@ -116,7 +124,6 @@ private:
     int num;
     QString nameContact;
     QPoint positionContact;
-    QString labelContact;
     QColor colorContact;
     bool isChecked;
     Contacts* neighbourContact;

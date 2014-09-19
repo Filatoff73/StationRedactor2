@@ -7,6 +7,7 @@
 RelayContact::RelayContact(QGraphicsObject* parent) : MainElement(parent)
 {
     nameElement = "КОНТАКТ";
+    typeElement = TYPE_RELAY_CONTACT;
 
      nContactsLeft=2;
      nContactsRight=0;
@@ -31,6 +32,24 @@ RelayContact::RelayContact(QGraphicsObject* parent) : MainElement(parent)
      associatedRelay=NULL;
 
 }
+
+RelayContact::RelayContact(int idElement, int posX, int posY, bool isMirrorGorizontal, bool isMirrorVertical, int sizeX, int sizeY, int nContactsLeft,int nContactsDown,int nContactsRight,int nContactsUp, QString name, QGraphicsObject* parent):
+     MainElement( idElement,  posX,  posY,  isMirrorGorizontal,  isMirrorVertical,  sizeX,  sizeY,  nContactsLeft, nContactsDown, nContactsRight, nContactsUp,  name, parent)
+{
+    typeElement = TYPE_RELAY_CONTACT;
+    for(int i=0;i<nContacts;i++)
+    {
+        arrContacts.append(new Contacts(0,0,0,0));
+        arrContacts.last()->setParentItem(this);
+        arrContacts.last()->setVisible(true);
+    }
+
+    this->ReDrawContact();
+    isLinked=false;
+    isProcessLinked=false;
+    associatedRelay=NULL;
+}
+
 
 void RelayContact::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
@@ -261,6 +280,41 @@ bool RelayContact::getIsProcessLinked() const
 void RelayContact::setIsProcessLinked(bool value)
 {
     isProcessLinked = value;
+}
+
+void RelayContact::SaveToXml(QXmlStreamWriter &writer)
+{
+
+    writer.writeStartElement("Element");
+    SaveBaseElementParametrs(writer);//атрибуты
+
+    writer.writeStartElement("Parametrs");
+
+    writer.writeAttribute("isLinked", QString::number(isLinked));
+    writer.writeAttribute("isProcessLinked", QString::number(isProcessLinked));
+    if(associatedRelay!=NULL)
+    {
+        writer.writeAttribute("associatedRelay", QString::number(associatedRelay->getIdElement()));
+    }
+    else
+    {
+         writer.writeAttribute("associatedRelay", "");
+    }
+
+    writer.writeEndElement();//parametrs
+
+
+    writer.writeStartElement("Contacts");
+
+    for(int i=0;i<arrContacts.size();i++)
+    {
+        arrContacts[i]->WriteToXmlContacts(writer);
+    }
+
+    writer.writeEndElement();//contacts
+
+
+    writer.writeEndElement();//element
 }
 
 

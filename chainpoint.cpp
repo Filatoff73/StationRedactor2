@@ -4,6 +4,7 @@
 ChainPoint::ChainPoint(QGraphicsObject* parent) : MainElement(parent)
 {
     nameElement = "";
+    typeElement = TYPE_CHAIN_POINT;
 
      nContactsLeft=1;
      nContactsRight=1;
@@ -16,6 +17,13 @@ ChainPoint::ChainPoint(QGraphicsObject* parent) : MainElement(parent)
      sizeY=1;
 
      SetContact();
+}
+
+ChainPoint::ChainPoint(int idElement, int posX, int posY, bool isMirrorGorizontal, bool isMirrorVertical, int sizeX, int sizeY, int nContactsLeft,int nContactsDown,int nContactsRight,int nContactsUp, QString name, QGraphicsObject* parent):
+     MainElement( idElement,  posX,  posY,  isMirrorGorizontal,  isMirrorVertical,  sizeX,  sizeY,  nContactsLeft, nContactsDown, nContactsRight, nContactsUp,  name, parent)
+{
+    typeElement = TYPE_CHAIN_POINT;
+        SetContact();
 }
 
 void ChainPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -45,4 +53,21 @@ void ChainPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         }
 
     }
+}
+
+void ChainPoint::SaveToXml(QXmlStreamWriter &writer)
+{
+    writer.writeStartElement("Element");
+    SaveBaseElementParametrs(writer);//атрибуты
+    writer.writeStartElement("Contacts");
+
+    for(int i=0;i<arrContacts.size();i++)
+    {
+        arrContacts[i]->WriteToXmlContacts(writer);
+    }
+
+    writer.writeEndElement();//contacts
+
+
+    writer.writeEndElement();//element
 }

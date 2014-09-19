@@ -7,7 +7,6 @@ Contacts::Contacts(int x, int y, int w, int h, QGraphicsItem* parent) : QGraphic
 {
     idContact=0;
     num=0;
-    labelContact = "0";
     colorContact=Qt::black;
     isChecked=false;
     isDrawedConnection=false;
@@ -75,19 +74,18 @@ void Contacts::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 painter->setRenderHint(QPainter::Antialiasing);
 
 
-
     switch (contactOrientation) {
     case Bottom:
-        painter->drawText(positionContact.x(),positionContact.y()-MainElement::getRad()/2.0,nameContact);
+        painter->drawText(positionContact.x()-MainElement::getRad(),positionContact.y()-MainElement::getRad()/2.0,nameContact);
         break;
     case Top:
-        painter->drawText(positionContact.x(),positionContact.y()+MainElement::getRad()*2,nameContact);
+        painter->drawText(positionContact.x()-MainElement::getRad(),positionContact.y()+MainElement::getRad()*2,nameContact);
         break;
     case Left:
         painter->drawText(positionContact.x()+MainElement::getRad()*1.5,positionContact.y()+MainElement::getRad(),nameContact);
         break;
     case Right:
-        painter->drawText(positionContact.x()-MainElement::getRad()*2.2,positionContact.y()+MainElement::getRad()/2.0,nameContact);
+        painter->drawText(positionContact.x() - nameContact.length()*MainElement::getRad()-3,positionContact.y()+MainElement::getRad()/2.0,nameContact);
         break;
     default:
         break;
@@ -132,6 +130,41 @@ void Contacts::setNum(int value)
 {
     num = value;
 }
+
+void Contacts::WriteToXmlContacts(QXmlStreamWriter &writer)
+{
+
+    writer.writeStartElement("Contact");
+
+    writer.writeAttribute("nameContact", nameContact);
+    writer.writeAttribute("num", QString::number(num));
+    if(neighbourContact!=NULL)
+    {
+        writer.writeAttribute("NeighbourBlock", QString::number(dynamic_cast<MainElement*>(neighbourContact->parentItem())->getIdElement() ) );
+        writer.writeAttribute("NeighbourContact", QString::number(neighbourContact->getNum()));
+    }
+    else
+    {
+        writer.writeAttribute("NeighbourBlock", "" );
+        writer.writeAttribute("NeighbourContact", "");
+    }
+
+    writer.writeEndElement();//contact
+}
+QString Contacts::getNameContact() const
+{
+    return nameContact;
+}
+
+void Contacts::setNameContact(const QString &value)
+{
+    nameContact = value;
+}
+
+
+
+
+
 
 
 

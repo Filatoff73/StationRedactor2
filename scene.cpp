@@ -10,6 +10,7 @@
 #include <QLabel>
 #include <QTextEdit>
 #include <QHBoxLayout>
+#include <QMessageBox>
 int Scene::scene_width=15000;
 int Scene::scene_height=15000;
 
@@ -252,91 +253,397 @@ void Scene::setArrElement(const QVector<MainElement *> &value)
     arrElement = value;
 }
 
-
-bool Scene::ChangeSiezeBlocks(QString s)
+void Scene::openFile(QFile &file)
 {
+    qDebug()<<"open";
 
-    int X=BlockRelay::getSiezeBlockX(), Y=BlockRelay::getSiezeBlockY();
-    QPushButton okButton,cancelButton;
+    for(int i=0;i<arrElement.size();i++)
+    {
+        delete arrElement[i];
+    }
+    arrElement.clear();
 
-    okButton.setText(tr("OK"));
-    cancelButton.setText(tr("Cancel"));
+    firstReading(file);
 
-    QHBoxLayout layout;
+    file.seek(0);
 
-    layout.addWidget(&cancelButton);
-    layout.addWidget(&okButton);
+    //if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    //{
+    //         return;
+   // }
+    secondReading(file);
 
-    QLabel text;
+}
 
-    text.setText(s);
-    layout.setDirection(QBoxLayout::BottomToTop);
-    layout.addWidget(&text);
+void Scene::setStationParametrs(QXmlStreamAttributes &attrib)
+{
+    if(attrib.hasAttribute("STEP_GRID"))
+    {
+        MainElement::SetStepGrid(attrib.value("STEP_GRID").toInt());
+    }
+    if(attrib.hasAttribute("RadContact"))
+    {
+        MainElement::setRad(attrib.value("RadContact").toInt());
+    }
 
-     question->setLayout(&layout);
+    if(attrib.hasAttribute("widthLinesElements"))
+    {
+        MainElement::setWidthLinesElements(attrib.value("widthLinesElements").toInt());
+    }
 
+    if(attrib.hasAttribute("widthLinesContacts"))
+    {
+        MainElement::setWidthLinesContacts(attrib.value("widthLinesContacts").toInt());
+    }
+}
 
-         QHBoxLayout layoutText1;
-         QLabel text1;
-         text1.setText("Размер по Ох");
-         QTextEdit siezeX;
-         siezeX.setMaximumHeight(30);
-         siezeX.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-         siezeX.setText(QString::number(X));
-         layoutText1.addWidget(&text1);
-         layoutText1.addWidget(&siezeX);
+void Scene::setElementParametrs(QXmlStreamAttributes &attrib)
+{
+    int typeElement=0, idElement=0, posX=0, posY=0, sizeX=0, sizeY=0, nContactsLeft=0, nContactsDown=0, nContactsRight=0, nContactsUp=0;
+    bool isMirrorGorizontal=false, isMirrorVertical=false;
+    QString name="";
 
-         QHBoxLayout layoutText2;
-         QLabel text2;
-         text2.setText("Размер по Оy");
-         QTextEdit siezeY;
-         siezeY.setMaximumHeight(30);
-         siezeY.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-         siezeY.setText(QString::number(Y));
-         layoutText2.addWidget(&text2);
-         layoutText2.addWidget(&siezeY);
+    if(attrib.hasAttribute("typeElement"))
+    {
+        typeElement = attrib.value("typeElement").toInt();
+    }
 
-     layout.addLayout(&layoutText1);
-     layout.addLayout(&layoutText2);
-     question->setLayout(&layout);
+    if(attrib.hasAttribute("idElement"))
+    {
+        idElement = attrib.value("idElement").toInt();
+    }
 
-     QObject::connect(&okButton, SIGNAL(clicked()), question, SLOT(accept()));
-     QObject::connect(&cancelButton, SIGNAL(clicked()), question, SLOT(reject()));
-     question->setVisible(true);
-     question->show();
-     question->exec();
+    if(attrib.hasAttribute("posX"))
+    {
+        posX = attrib.value("posX").toInt();
+    }
 
-     if(question->result() == QDialog::Accepted)
-     {
-         X=siezeX.toPlainText().toInt();
-         Y=siezeY.toPlainText().toInt();
+    if(attrib.hasAttribute("posY"))
+    {
+        posY = attrib.value("posY").toInt();
+    }
 
-         if(X!=0 && Y!=0)
-         {
-         BlockRelay::setSiezeBlockX(X);
-         BlockRelay::setSiezeBlockY(Y);
+    if(attrib.hasAttribute("isMirrorGorizontal"))
+    {
+        if(attrib.value("isMirrorGorizontal").toInt()==1)
+            isMirrorGorizontal=true;
+        else
+            isMirrorGorizontal=false;
 
-         for(int i=0;i<arrElement.size();i++)
-         {
-             if(dynamic_cast<BlockRelay*>(arrElement[i])!=NULL)
+    }
+
+    if(attrib.hasAttribute("isMirrorVertical"))
+    {
+        if(attrib.value("isMirrorVertical").toInt()==1)
+            isMirrorVertical=true;
+        else
+            isMirrorVertical=false;
+    }
+
+    if(attrib.hasAttribute("sizeX"))
+    {
+        sizeX = attrib.value("sizeX").toInt();
+    }
+
+    if(attrib.hasAttribute("sizeY"))
+    {
+        sizeY = attrib.value("sizeY").toInt();
+    }
+
+    if(attrib.hasAttribute("nContactsLeft"))
+    {
+        nContactsLeft = attrib.value("nContactsLeft").toInt();
+    }
+
+    if(attrib.hasAttribute("nContactsDown"))
+    {
+        nContactsDown = attrib.value("nContactsDown").toInt();
+    }
+
+    if(attrib.hasAttribute("nContactsRight"))
+    {
+        nContactsRight = attrib.value("nContactsRight").toInt();
+    }
+
+    if(attrib.hasAttribute("nContactsUp"))
+    {
+        nContactsUp = attrib.value("nContactsUp").toInt();
+    }
+
+    if(attrib.hasAttribute("name"))
+    {
+        name = attrib.value("name").toString();
+    }
+
+    switch (typeElement)
+    {
+    case 5:
+        arrElement.append(new BlockRelay(idElement, posX, posY, isMirrorGorizontal, isMirrorVertical, sizeX, sizeY, nContactsLeft, nContactsDown, nContactsRight, nContactsUp,name));
+        arrElement.last()->setVisible(true);
+        this->addItem(arrElement.last());
+        break;
+    case 4:
+        arrElement.append(new ChainPolus(idElement, posX, posY, isMirrorGorizontal, isMirrorVertical, sizeX, sizeY, nContactsLeft, nContactsDown, nContactsRight, nContactsUp,name));
+        arrElement.last()->setVisible(true);
+        this->addItem(arrElement.last());
+        break;
+    case 3:
+        arrElement.append(new RelayContact(idElement, posX, posY, isMirrorGorizontal, isMirrorVertical, sizeX, sizeY, nContactsLeft, nContactsDown, nContactsRight, nContactsUp,name));
+        arrElement.last()->setVisible(true);
+        this->addItem(arrElement.last());
+        break;
+    case 1:
+        arrElement.append(new RelayRelay(idElement, posX, posY, isMirrorGorizontal, isMirrorVertical, sizeX, sizeY, nContactsLeft, nContactsDown, nContactsRight, nContactsUp,name));
+        arrElement.last()->setVisible(true);
+        this->addItem(arrElement.last());
+        break;
+    case 0:
+        arrElement.append(new ChainPoint(idElement, posX, posY, isMirrorGorizontal, isMirrorVertical, sizeX, sizeY, nContactsLeft, nContactsDown, nContactsRight, nContactsUp,name));
+        arrElement.last()->setVisible(true);
+        this->addItem(arrElement.last());
+        break;
+
+    default:
+        break;
+    }
+}
+
+void Scene::readOneElement(QXmlStreamReader &reader)
+{
+    QXmlStreamAttributes attrib = reader.attributes();
+
+    int id=0;
+
+    if(attrib.hasAttribute("idElement"))
+    {
+        id=attrib.value("idElement").toInt();
+    }
+
+       MainElement* element = findElementById(id);
+
+       if(!element)
+           return;
+
+        while( !reader.hasError() &&  !(reader.isEndElement() && reader.name() == "Element") )
+        {
+             QXmlStreamReader::TokenType token = reader.readNext();
+
+             if(token == QXmlStreamReader::StartElement)
              {
-                 arrElement[i]->setSizeX(X);
-                 arrElement[i]->setSizeY(Y);
-                 arrElement[i]->ReDrawContact();
+                 if(reader.name() == "Contact")
+                 {
+                     QXmlStreamAttributes attribContacts = reader.attributes();
+                     int num = attribContacts.value("num").toInt();
+                     Contacts* contactElement = element->findContactByNum(num);
+                     contactElement->setNameContact( attribContacts.value("nameContact").toString());
+
+                     if(attribContacts.hasAttribute("NeighbourBlock") && attribContacts.hasAttribute("NeighbourContact"))
+                     {
+                     if(attribContacts.value("NeighbourBlock").toString()!= "" && attribContacts.value("NeighbourContact").toString()!="")
+                     {
+                         int idNeigbourBlock = attribContacts.value("NeighbourBlock").toInt();
+                         int numNeighbourContact = attribContacts.value("NeighbourContact").toInt();
+                         contactElement->SetNeighbour(findElementById(idNeigbourBlock)->findContactByNum(numNeighbourContact));
+                     }
+                     }
+
+                 }
+
+                 if(reader.name() == "Parametrs")
+                 {
+                     QXmlStreamAttributes attribParametrs = reader.attributes();
+
+                     if(attribParametrs.hasAttribute("isVoltage"))
+                     {
+                         if(attribParametrs.value("isVoltage").toInt()==1)
+                         {
+                            dynamic_cast<RelayRelay*>(element)->setIsVoltage(true);
+                         }
+                         else
+                         {
+                             dynamic_cast<RelayRelay*>(element)->setIsVoltage(false);
+                         }
+                     }
+
+                     if(attribParametrs.hasAttribute("delay"))
+                     {
+                            dynamic_cast<RelayRelay*>(element)->setDelay(attribParametrs.value("delay").toInt());
+                     }
+
+                     if(attribParametrs.hasAttribute("isLinked"))
+                     {
+                         if(attribParametrs.value("isLinked").toInt()==1)
+                         {
+                            dynamic_cast<RelayContact*>(element)->setIsLinked(true);
+                         }
+                         else
+                         {
+                             dynamic_cast<RelayContact*>(element)->setIsLinked(false);
+                         }
+                     }
+
+                     if(attribParametrs.hasAttribute("associatedRelay") && attribParametrs.value("associatedRelay").toString()!="")
+                     {
+                            dynamic_cast<RelayContact*>(element)->setAssociatedRelay(dynamic_cast<RelayRelay*>(findElementById(attribParametrs.value("associatedRelay").toInt())));
+                     }
+
+
+                 }
+
+
              }
-         }
-         }
 
-         return true;
-     }
+        }
 
-     if(question->result() == QDialog::Rejected)
-     {
-          return false;
-     }
+
 
 
 }
+
+void Scene::firstReading(QFile &file)
+{
+    QXmlStreamReader reader(file.readAll());
+
+    while(!reader.atEnd() && !reader.hasError())
+    {
+        QXmlStreamReader::TokenType token = reader.readNext();
+
+        if(token == QXmlStreamReader::StartDocument)
+        {
+            continue;
+        }
+
+        if(token == QXmlStreamReader::StartElement)
+        {
+            if(reader.name() == "Station")
+            {
+                QXmlStreamAttributes attrib = reader.attributes();
+                setStationParametrs(attrib);
+            }
+
+            if(reader.name() == "Element")
+            {
+                QXmlStreamAttributes attrib = reader.attributes();
+                setElementParametrs(attrib);
+            }
+
+
+        }
+
+
+    }
+
+
+
+    if(reader.hasError())
+    {
+        QMessageBox::critical(this->views().first()->cornerWidget(),
+                              "GeneratorOut::parseXML",
+                              reader.errorString(),
+                              QMessageBox::Ok);
+    }
+
+    reader.clear();
+    this->update();
+}
+
+void Scene::secondReading(QFile &file)
+{
+
+    QXmlStreamReader reader(file.readAll());
+
+    while(!reader.atEnd() && !reader.hasError())
+    {
+        QXmlStreamReader::TokenType token = reader.readNext();
+
+        if(token == QXmlStreamReader::StartDocument)
+        {
+            continue;
+        }
+
+
+        if(token == QXmlStreamReader::StartElement)
+        {
+
+            if(reader.name() == "Element")
+            {
+                readOneElement(reader);
+
+            }
+
+        }
+    }
+
+
+
+    if(reader.hasError())
+    {
+        QMessageBox::critical(this->views().first()->cornerWidget(),
+                              "GeneratorOut::parseXML",
+                              reader.errorString(),
+                              QMessageBox::Ok);
+    }
+
+    reader.clear();
+    this->update();
+
+
+}
+
+
+
+
+
+void Scene::saveFile(QFile &file)
+{
+    qDebug()<<"save";
+
+    for(int i=0;i<arrElement.size();i++)
+    {
+        arrElement[i]->setIdElement(i);
+    }
+
+    QXmlStreamWriter writer(&file);
+
+    writer.setAutoFormatting(true);
+    writer.writeStartDocument("1.0");
+
+    if(arrElement.size()==0)
+        return;
+
+
+
+    writer.writeStartElement("Station");
+    writer.writeAttribute("STEP_GRID", QString::number(MainElement::GetStepGrid()));
+    writer.writeAttribute("RadContact", QString::number(MainElement::getRad()));
+    writer.writeAttribute("widthLinesElements", QString::number(MainElement::getWidthLinesElements()));
+    writer.writeAttribute("widthLinesContacts", QString::number(MainElement::getWidthLinesContacts()));
+
+    writer.writeStartElement("Elements");
+    for(int i=0;i<arrElement.size();i++)
+    {
+        arrElement[i]->SaveToXml(writer);
+    }
+    writer.writeEndElement();//Elements
+
+    writer.writeEndElement();//Station
+    writer.writeEndDocument();
+
+
+}
+
+MainElement* Scene::findElementById(int id)
+{
+    for(int i=0;i<arrElement.size();i++)
+    {
+        if(arrElement[i]->getIdElement()==id)
+            return arrElement[i];
+    }
+
+    return NULL;
+}
+
+
 
 
 void Scene::drawBackground(QPainter *painter, const QRectF &rect)
@@ -662,7 +969,7 @@ void Scene::DrawContactsLine(QPainter *painter, const QRectF &rect)
 
 }
 
-void Scene::AddBlock()
+void Scene::AddTestBlock()
 {
     arrElement.append(new BlockRelay());
     arrElement.last()->setVisible(true);
@@ -684,11 +991,130 @@ void Scene::AddBlock()
     }
     }
 
-
-
-
     nElement++;
 
+}
+
+void Scene::AddFileBlock()
+{
+    QString saveDir;
+
+    QString fileName = QFileDialog::getOpenFileName(this->views().last()->cornerWidget(),
+             tr("Открыть блок"), "C:/", "*.block");
+
+    if(!fileName.compare(""))
+        return;
+
+    QDir dir(fileName);
+    saveDir = dir.absolutePath();
+
+    QFile f(saveDir);
+    if (!f.open(QIODevice::ReadOnly | QIODevice::Text))
+             return;
+
+
+    QXmlStreamReader reader(f.readAll());
+    QString name = "";
+    int nContactsLeft=0, nContactsDown=0, ncOntactsRight=0, nContactsUp=0;
+
+    while(!reader.atEnd() && !reader.hasError())
+    {
+        QXmlStreamReader::TokenType token = reader.readNext();
+
+        if(token == QXmlStreamReader::StartElement)
+        {
+
+            if(reader.name() == "Block")
+            {
+                QXmlStreamAttributes attrib = reader.attributes();
+                name = attrib.value("name").toString();
+
+            }
+            if(reader.name() == "Contacts")
+            {
+                QXmlStreamAttributes attrib = reader.attributes();
+                nContactsLeft = attrib.value("left").toInt();
+                nContactsDown = attrib.value("down").toInt();
+                ncOntactsRight = attrib.value("right").toInt();
+                nContactsUp = attrib.value("up").toInt();
+
+                int sizeX = std::max(nContactsUp, nContactsDown)/2.0 + 2;
+                int sizeY= std::max(nContactsLeft, ncOntactsRight)/2.0 + 2;
+
+                if(sizeX<4)
+                    sizeX=4;
+                if(sizeY<4)
+                    sizeY=4;
+
+                arrElement.append(new BlockRelay(0,0,0,false,false,sizeX,sizeY, nContactsLeft, nContactsDown, ncOntactsRight, nContactsUp, name));
+                arrElement.last()->setVisible(true);
+                this->addItem(arrElement.last());
+                arrElement.last()->moveBy(MainElement::GetStepGrid(),MainElement::GetStepGrid());
+
+                bool fl = true;
+                while(fl)
+                {
+                    fl=false;
+                for(int i=0;i<arrElement.size()-1;i++)
+                {
+                    if(arrElement[i]->pos()==arrElement.last()->pos())
+                    {
+                        arrElement.last()->moveBy(dynamic_cast<MainElement*>(arrElement[i])->getSizeX()*MainElement::GetStepGrid()+MainElement::GetStepGrid(), 0);
+                        fl=true;
+
+                    }
+                }
+                }
+                nElement++;
+
+                ReadContactsFileBlock(reader, arrElement.last());
+
+
+            }
+
+        }
+    }
+
+    if(reader.hasError())
+    {
+        QMessageBox::critical(this->views().first()->cornerWidget(),
+                              "GeneratorOut::parseXML",
+                              reader.errorString(),
+                              QMessageBox::Ok);
+    }
+
+    reader.clear();
+    this->update();
+
+
+    f.close();
+
+}
+
+void Scene::ReadContactsFileBlock(QXmlStreamReader &reader, MainElement *element)
+{
+
+               if(!element)
+                   return;
+
+                while( !reader.hasError() &&  !(reader.isEndElement() && reader.name() == "Contacts") )
+                {
+
+                  QXmlStreamReader::TokenType token = reader.readNext();
+
+                   if(token == QXmlStreamReader::StartElement)
+                     {
+                         if(reader.name() == "Contact")
+                         {
+                             QXmlStreamAttributes attribContacts = reader.attributes();
+                             int num = attribContacts.value("num").toInt();
+                             Contacts* contactElement = element->findContactByNum(num);
+                             contactElement->setNameContact( attribContacts.value("name").toString());
+
+
+                         }
+                    }
+                }
 }
 
 void Scene::AddPoint()
@@ -842,3 +1268,4 @@ Scene::~Scene()
 
     delete question;
 }
+

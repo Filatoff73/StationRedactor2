@@ -12,6 +12,12 @@
 #include <QMenu>
 #include <QAction>
 #include <QObject>
+#include <QStringRef>
+
+#include <QFile>
+#include <QDir>
+#include <QFileDialog>
+#include <qxmlstream.h>
 #define SCALE 1.1
 
 class RelayContact;
@@ -20,6 +26,10 @@ class MainElement : public QGraphicsObject
 
 public:
     MainElement(QGraphicsObject* parent=0);
+
+    MainElement(int idElement, int posX, int posY, bool isMirrorGorizontal, bool isMirrorVertical, int sizeX, int sizeY, int nContactsLeft,int nContactsDown,int nContactsRight,int nContactsUp, QString name, QGraphicsObject* parent=0);
+
+
     virtual ~MainElement();
 
     QRectF boundingRect() const ;
@@ -80,6 +90,11 @@ public:
     QString getNameElement() const;
     void setNameElement(const QString &value);
 
+    virtual void SaveToXml(QXmlStreamWriter& writer)=0;
+    void SaveBaseElementParametrs(QXmlStreamWriter& writer);
+
+    Contacts* findContactByNum(int num);
+
 protected:
     static int STEP_GRID;
     static int rad;
@@ -100,12 +115,25 @@ protected:
 
     QString nameElement;
     int idElement;
+    int typeElement;
 
     QVector<Contacts*> arrContacts;        
     QDialog* question;
 
     static bool isSelectRelayMode;
     static RelayContact* relayContactSelected;
+
+
+
+    const int TYPE_CHAIN_POINT = 0;
+    const int TYPE_RELAY_RELAY = 1;
+    const int TYPE_CHAIN_CONTACT = 2;
+    const int TYPE_RELAY_CONTACT = 3;
+    const int TYPE_CHAIN_POLUS = 4;
+    const int TYPE_BLOCK_RELAY = 5;
+
+
+
 
 
 

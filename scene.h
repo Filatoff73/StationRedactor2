@@ -27,7 +27,10 @@ public:
         scene_height = height;
     }
 
-    void AddBlock();
+    void AddTestBlock();
+    void AddFileBlock();
+    //Считать контакты нового блока из файла
+    void ReadContactsFileBlock(QXmlStreamReader& reader, MainElement* elem);
 
     void AddPoint();
 
@@ -57,13 +60,25 @@ public:
     }
 
     void DeleteConnectionLine();
-    bool ChangeSiezeBlocks(QString s);
+
     bool ChangeDifferentParametrs(QString s);
     QString SetStringParamElementDialog(QString s);
 
 
     QVector<MainElement *> getArrElement() const;
     void setArrElement(const QVector<MainElement *> &value);
+
+    void openFile(QFile &f);
+    //Открытие параметров станции из файла
+    void setStationParametrs(QXmlStreamAttributes &attrib);
+    //Создание елементов из файла, ввод начальных параметров с первого прохода
+    void setElementParametrs(QXmlStreamAttributes &attrib);
+    //Второй проход файла, расстановка контактов и доп параметров элементов
+    void readOneElement(QXmlStreamReader& reader);
+    void firstReading(QFile &f);
+    void secondReading(QFile &f);
+    void saveFile(QFile &f);
+    MainElement* findElementById(int id);
 
 private:
     static int scene_width;

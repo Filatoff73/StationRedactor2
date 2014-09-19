@@ -13,13 +13,8 @@ View::View(QGraphicsView* parent) : QGraphicsView(parent)
     this->verticalScrollBar()->setValue(1);
 
 
-    stepSlider = MainElement::GetStepGrid()/2.0;
+    InitViewVariable();
     this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-
-
-
-
-
 
 
 
@@ -74,4 +69,9 @@ void View::keyPressEvent(QKeyEvent *event)
     }
 
 
+}
+
+void View::InitViewVariable()
+{
+        stepSlider = MainElement::GetStepGrid()/2.0;
 }
