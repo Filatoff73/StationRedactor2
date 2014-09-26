@@ -15,6 +15,7 @@ ChainPolus::ChainPolus(QGraphicsObject* parent) : MainElement(parent)
 
      sizeX=2;
      sizeY=2;
+     isPlus=true;
 
      SetContact();
 
@@ -24,13 +25,38 @@ ChainPolus::ChainPolus(int idElement, int posX, int posY, bool isMirrorGorizonta
      MainElement( idElement,  posX,  posY,  isMirrorGorizontal,  isMirrorVertical,  sizeX,  sizeY,  nContactsLeft, nContactsDown, nContactsRight, nContactsUp,  name, parent)
 {
     typeElement = TYPE_CHAIN_POLUS;
+    isPlus=false;
         SetContact();
 }
 
 void ChainPolus::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    painter->save();
 
     painter->drawText(0,STEP_GRID/2.0, nameElement);
+
+    QPen penPol = painter->pen();
+    int r=5;
+
+    if(isPlus)
+    {
+        penPol.setColor(Qt::green);
+        painter->setPen(penPol);
+        painter->drawEllipse(sizeX/1.5*STEP_GRID + r, STEP_GRID/2.0 - 2*r, 2*r, 2*r);
+        painter->drawLine(sizeX/1.5*STEP_GRID + r, STEP_GRID/2.0 - r, sizeX/1.5*STEP_GRID + 3*r, STEP_GRID/2.0 - r );
+        painter->drawLine(sizeX/1.5*STEP_GRID + 2*r, STEP_GRID/2.0 - 2*r, sizeX/1.5*STEP_GRID + 2*r, STEP_GRID/2.0);
+       // painter->drawText(sizeX/1.5*STEP_GRID,STEP_GRID/2.0, "+");
+    }
+
+    if(!isPlus)
+    {
+        penPol.setColor(Qt::red);
+        painter->setPen(penPol);
+        painter->drawEllipse(sizeX/1.5*STEP_GRID + r, STEP_GRID/2.0 - 2*r, 2*r, 2*r);
+        painter->drawLine(sizeX/1.5*STEP_GRID + r, STEP_GRID/2.0 - r, sizeX/1.5*STEP_GRID + 3*r, STEP_GRID/2.0 - r );
+    }
+
+    painter->restore();
     MainElement::paint(painter, option, widget);
 
 
@@ -89,12 +115,19 @@ void ChainPolus::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     myMenu.addAction("Вверх");
     myMenu.addAction("Вниз");
     myMenu.addAction("Переименовать элемент");
+    myMenu.addAction("Изменить полярность");
     myMenu.addAction("Удалить элемент");
 
     QAction* selectedItem = myMenu.exec(event->screenPos());
     if (selectedItem)
     {
         QString txt = selectedItem->text();
+
+        if(!txt.compare("Изменить полярность"))
+        {
+            isPlus=!isPlus;
+            dynamic_cast<Scene*>(this->scene())->update();
+        }
 
         if(!txt.compare("Влево"))
         {
@@ -159,6 +192,13 @@ void ChainPolus::SaveToXml(QXmlStreamWriter &writer)
 {
     writer.writeStartElement("Element");
     SaveBaseElementParametrs(writer);//атрибуты
+
+    writer.writeStartElement("Parametrs");
+
+    writer.writeAttribute("isPlus", QString::number(isPlus));
+
+    writer.writeEndElement();//parametrs
+
     writer.writeStartElement("Contacts");
 
     for(int i=0;i<arrContacts.size();i++)
@@ -171,3 +211,13 @@ void ChainPolus::SaveToXml(QXmlStreamWriter &writer)
 
     writer.writeEndElement();//element
 }
+bool ChainPolus::getIsPlus() const
+{
+    return isPlus;
+}
+
+void ChainPolus::setIsPlus(bool value)
+{
+    isPlus = value;
+}
+

@@ -74,6 +74,16 @@ void Contacts::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 painter->setRenderHint(QPainter::Antialiasing);
 
 
+
+
+
+    QBrush br(Qt::SolidPattern);
+    QPen pen = this->pen();
+    pen.setWidth(MainElement::getWidthLinesContacts());
+    painter->setPen(pen);
+    br.setColor(pen.color());
+    painter->setBrush(br);
+
     switch (contactOrientation) {
     case Bottom:
         painter->drawText(positionContact.x()-MainElement::getRad(),positionContact.y()-MainElement::getRad()/2.0,nameContact);
@@ -90,14 +100,6 @@ painter->setRenderHint(QPainter::Antialiasing);
     default:
         break;
     }
-
-
-    QBrush br(Qt::SolidPattern);
-    QPen pen = this->pen();
-    pen.setWidth(MainElement::getWidthLinesContacts());
-    painter->setPen(pen);
-    br.setColor(pen.color());
-    painter->setBrush(br);
 
 
 

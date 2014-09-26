@@ -15,6 +15,8 @@ public:
 
     void wheelEvent(QWheelEvent* event);
 
+    void contextMenuEvent (QContextMenuEvent * event);
+
     void keyPressEvent(QKeyEvent *event);
 
     void InitViewVariable();

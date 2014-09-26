@@ -11,6 +11,11 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
     void SaveToXml(QXmlStreamWriter& writer);
+    bool getIsPlus() const;
+    void setIsPlus(bool value);
+
+private:
+    bool isPlus;
 };
 
 #endif // CHAINPOLUS_H

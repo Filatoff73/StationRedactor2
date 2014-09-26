@@ -375,37 +375,51 @@ void Scene::setElementParametrs(QXmlStreamAttributes &attrib)
         name = attrib.value("name").toString();
     }
 
-    switch (typeElement)
+    if(typeElement == MainElement::getTYPE_CHAIN_POLUS())
     {
-    case 5:
-        arrElement.append(new BlockRelay(idElement, posX, posY, isMirrorGorizontal, isMirrorVertical, sizeX, sizeY, nContactsLeft, nContactsDown, nContactsRight, nContactsUp,name));
-        arrElement.last()->setVisible(true);
-        this->addItem(arrElement.last());
-        break;
-    case 4:
         arrElement.append(new ChainPolus(idElement, posX, posY, isMirrorGorizontal, isMirrorVertical, sizeX, sizeY, nContactsLeft, nContactsDown, nContactsRight, nContactsUp,name));
         arrElement.last()->setVisible(true);
         this->addItem(arrElement.last());
-        break;
-    case 3:
+    }
+    else if(typeElement == MainElement::getTYPE_RELAY_CONTACT())
+    {
         arrElement.append(new RelayContact(idElement, posX, posY, isMirrorGorizontal, isMirrorVertical, sizeX, sizeY, nContactsLeft, nContactsDown, nContactsRight, nContactsUp,name));
         arrElement.last()->setVisible(true);
         this->addItem(arrElement.last());
-        break;
-    case 1:
+    }
+
+    else if(typeElement == MainElement::getTYPE_RELAY_RELAY())
+    {
         arrElement.append(new RelayRelay(idElement, posX, posY, isMirrorGorizontal, isMirrorVertical, sizeX, sizeY, nContactsLeft, nContactsDown, nContactsRight, nContactsUp,name));
         arrElement.last()->setVisible(true);
         this->addItem(arrElement.last());
-        break;
-    case 0:
+    }
+
+    else if(typeElement == MainElement::getTYPE_CHAIN_POINT())
+    {
         arrElement.append(new ChainPoint(idElement, posX, posY, isMirrorGorizontal, isMirrorVertical, sizeX, sizeY, nContactsLeft, nContactsDown, nContactsRight, nContactsUp,name));
         arrElement.last()->setVisible(true);
         this->addItem(arrElement.last());
-        break;
-
-    default:
-        break;
     }
+
+    else if(typeElement == MainElement::getTYPE_CHAIN_BUTTON())
+    {
+
+    }
+
+    else if(typeElement == MainElement::getTYPE_RELAY_SECOND())
+    {
+
+    }
+
+    else
+    {
+        arrElement.append(new BlockRelay(idElement, typeElement, posX, posY, isMirrorGorizontal, isMirrorVertical, sizeX, sizeY, nContactsLeft, nContactsDown, nContactsRight, nContactsUp,name));
+        arrElement.last()->setVisible(true);
+        this->addItem(arrElement.last());
+    }
+
+
 }
 
 void Scene::readOneElement(QXmlStreamReader &reader)
@@ -487,6 +501,10 @@ void Scene::readOneElement(QXmlStreamReader &reader)
                             dynamic_cast<RelayContact*>(element)->setAssociatedRelay(dynamic_cast<RelayRelay*>(findElementById(attribParametrs.value("associatedRelay").toInt())));
                      }
 
+                     if(attribParametrs.hasAttribute("isPlus") )
+                     {
+                            dynamic_cast<ChainPolus*>(element)->setIsPlus(attribParametrs.value("isPlus").toInt());
+                     }
 
                  }
 
@@ -969,12 +987,17 @@ void Scene::DrawContactsLine(QPainter *painter, const QRectF &rect)
 
 }
 
-void Scene::AddTestBlock()
+void Scene::AddTestBlock(QPoint pos)
 {
     arrElement.append(new BlockRelay());
     arrElement.last()->setVisible(true);
     this->addItem(arrElement.last());
-    arrElement.last()->moveBy(MainElement::GetStepGrid(),MainElement::GetStepGrid());
+    int gridSize = MainElement::GetStepGrid();
+    qreal xV = round(pos.x()/gridSize)*gridSize;
+    qreal yV = round(pos.y()/gridSize)*gridSize;
+
+
+    arrElement.last()->moveBy(xV, yV);
 
     bool fl = true;
     while(fl)
@@ -995,12 +1018,12 @@ void Scene::AddTestBlock()
 
 }
 
-void Scene::AddFileBlock()
+void Scene::AddFileBlock(QPoint pos)
 {
     QString saveDir;
 
     QString fileName = QFileDialog::getOpenFileName(this->views().last()->cornerWidget(),
-             tr("Открыть блок"), "C:/", "*.block");
+             tr("Открыть блок"), "", "*.block");
 
     if(!fileName.compare(""))
         return;
@@ -1015,6 +1038,7 @@ void Scene::AddFileBlock()
 
     QXmlStreamReader reader(f.readAll());
     QString name = "";
+    int type = MainElement::getTYPE_BLOCK_RELAY();
     int nContactsLeft=0, nContactsDown=0, ncOntactsRight=0, nContactsUp=0;
 
     while(!reader.atEnd() && !reader.hasError())
@@ -1029,6 +1053,9 @@ void Scene::AddFileBlock()
                 QXmlStreamAttributes attrib = reader.attributes();
                 name = attrib.value("name").toString();
 
+                if(attrib.value("type").toString()!="")
+                type = attrib.value("type").toInt();
+
             }
             if(reader.name() == "Contacts")
             {
@@ -1038,7 +1065,7 @@ void Scene::AddFileBlock()
                 ncOntactsRight = attrib.value("right").toInt();
                 nContactsUp = attrib.value("up").toInt();
 
-                int sizeX = std::max(nContactsUp, nContactsDown)/2.0 + 2;
+                int sizeX = std::max(nContactsUp, nContactsDown)/2.0 + 3;
                 int sizeY= std::max(nContactsLeft, ncOntactsRight)/2.0 + 2;
 
                 if(sizeX<4)
@@ -1046,10 +1073,15 @@ void Scene::AddFileBlock()
                 if(sizeY<4)
                     sizeY=4;
 
-                arrElement.append(new BlockRelay(0,0,0,false,false,sizeX,sizeY, nContactsLeft, nContactsDown, ncOntactsRight, nContactsUp, name));
+                arrElement.append(new BlockRelay(0,type,0,0,false,false,sizeX,sizeY, nContactsLeft, nContactsDown, ncOntactsRight, nContactsUp, name));
                 arrElement.last()->setVisible(true);
                 this->addItem(arrElement.last());
-                arrElement.last()->moveBy(MainElement::GetStepGrid(),MainElement::GetStepGrid());
+                int gridSize = MainElement::GetStepGrid();
+                qreal xV = round(pos.x()/gridSize)*gridSize;
+                qreal yV = round(pos.y()/gridSize)*gridSize;
+
+
+                arrElement.last()->moveBy(xV, yV);
 
                 bool fl = true;
                 while(fl)
@@ -1117,12 +1149,18 @@ void Scene::ReadContactsFileBlock(QXmlStreamReader &reader, MainElement *element
                 }
 }
 
-void Scene::AddPoint()
+void Scene::AddPoint(QPoint pos)
 {
     arrElement.append(new ChainPoint());
     arrElement.last()->setVisible(true);
     this->addItem(arrElement.last());
-    arrElement.last()->moveBy(MainElement::GetStepGrid(),MainElement::GetStepGrid());
+
+    int gridSize = MainElement::GetStepGrid();
+    qreal xV = round(pos.x()/gridSize)*gridSize;
+    qreal yV = round(pos.y()/gridSize)*gridSize;
+
+
+    arrElement.last()->moveBy(xV, yV);
 
     bool fl = true;
     while(fl)
@@ -1145,12 +1183,17 @@ void Scene::AddPoint()
     nElement++;
 }
 
-void Scene::AddPolus()
+void Scene::AddPolus(QPoint pos)
 {
     arrElement.append(new ChainPolus());
     arrElement.last()->setVisible(true);
     this->addItem(arrElement.last());
-    arrElement.last()->moveBy(MainElement::GetStepGrid(),MainElement::GetStepGrid());
+    int gridSize = MainElement::GetStepGrid();
+    qreal xV = round(pos.x()/gridSize)*gridSize;
+    qreal yV = round(pos.y()/gridSize)*gridSize;
+
+
+    arrElement.last()->moveBy(xV, yV);
 
     bool fl = true;
     while(fl)
@@ -1174,13 +1217,18 @@ arrElement.last()->setNameElement(SetStringParamElementDialog(arrElement.last()-
     nElement++;
 }
 
-void Scene::AddRelayContact()
+void Scene::AddRelayContact(QPoint pos)
 {
     arrElement.append(new RelayContact());
     arrElement.last()->setVisible(true);
     this->addItem(arrElement.last());
 
-    arrElement.last()->moveBy(MainElement::GetStepGrid(),MainElement::GetStepGrid());
+    int gridSize = MainElement::GetStepGrid();
+    qreal xV = round(pos.x()/gridSize)*gridSize;
+    qreal yV = round(pos.y()/gridSize)*gridSize;
+
+
+    arrElement.last()->moveBy(xV, yV);
 
     bool fl = true;
     while(fl)
@@ -1202,12 +1250,17 @@ arrElement.last()->setNameElement(SetStringParamElementDialog(arrElement.last()-
     nElement++;
 }
 
-void Scene::AddRelay()
+void Scene::AddRelay(QPoint pos)
 {
     arrElement.append(new RelayRelay());
     arrElement.last()->setVisible(true);
     this->addItem(arrElement.last());
-    arrElement.last()->moveBy(MainElement::GetStepGrid(),MainElement::GetStepGrid());
+    int gridSize = MainElement::GetStepGrid();
+    qreal xV = round(pos.x()/gridSize)*gridSize;
+    qreal yV = round(pos.y()/gridSize)*gridSize;
+
+
+    arrElement.last()->moveBy(xV, yV);
 
     bool fl = true;
     while(fl)

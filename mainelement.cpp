@@ -21,6 +21,17 @@ int MainElement::widthLinesContacts=1;
 RelayContact* MainElement::relayContactSelected=NULL;
 
 
+ const int MainElement::TYPE_CHAIN_POINT=0;
+ const int MainElement::TYPE_RELAY_RELAY=1;
+ const int MainElement::TYPE_CHAIN_CONTACT=2;
+ const int MainElement::TYPE_RELAY_CONTACT=3;
+ const int MainElement::TYPE_CHAIN_POLUS=4;
+ const int MainElement::TYPE_CHAIN_BUTTON=5;
+ const int MainElement::TYPE_RELAY_SECOND=6;
+ const int MainElement::TYPE_BLOCK_RELAY =7;
+
+
+
 
 MainElement::MainElement(QGraphicsObject* parent) : QGraphicsObject(parent)
 {
@@ -280,6 +291,59 @@ Contacts *MainElement::findContactByNum(int num)
     }
     return NULL;
 }
+
+int MainElement::getTYPE_RELAY_RELAY()
+{
+    return TYPE_RELAY_RELAY;
+}
+int MainElement::getTYPE_CHAIN_CONTACT()
+{
+    return TYPE_CHAIN_CONTACT;
+}
+int MainElement::getTYPE_RELAY_CONTACT()
+{
+    return TYPE_RELAY_CONTACT;
+}
+int MainElement::getTYPE_CHAIN_POLUS()
+{
+    return TYPE_CHAIN_POLUS;
+}
+int MainElement::getTYPE_CHAIN_BUTTON()
+{
+    return TYPE_CHAIN_BUTTON;
+}
+int MainElement::getTYPE_RELAY_SECOND()
+{
+    return TYPE_RELAY_SECOND;
+}
+int MainElement::getTYPE_CHAIN_POINT()
+{
+    return TYPE_CHAIN_POINT;
+}
+int MainElement::getTYPE_BLOCK_RELAY()
+{
+    return TYPE_BLOCK_RELAY;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

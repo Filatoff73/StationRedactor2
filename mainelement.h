@@ -95,6 +95,23 @@ public:
 
     Contacts* findContactByNum(int num);
 
+
+    static int getTYPE_RELAY_RELAY();
+
+    static int getTYPE_CHAIN_CONTACT();
+
+    static int getTYPE_RELAY_CONTACT();
+
+    static int getTYPE_CHAIN_POLUS();
+
+    static int getTYPE_CHAIN_BUTTON();
+
+    static int getTYPE_RELAY_SECOND();
+
+    static int getTYPE_CHAIN_POINT();
+
+    static int getTYPE_BLOCK_RELAY();
+
 protected:
     static int STEP_GRID;
     static int rad;
@@ -125,12 +142,14 @@ protected:
 
 
 
-    const int TYPE_CHAIN_POINT = 0;
-    const int TYPE_RELAY_RELAY = 1;
-    const int TYPE_CHAIN_CONTACT = 2;
-    const int TYPE_RELAY_CONTACT = 3;
-    const int TYPE_CHAIN_POLUS = 4;
-    const int TYPE_BLOCK_RELAY = 5;
+    static const int TYPE_CHAIN_POINT;
+    static const int TYPE_RELAY_RELAY;
+    static const int TYPE_CHAIN_CONTACT;
+    static const int TYPE_RELAY_CONTACT;
+    static const int TYPE_CHAIN_POLUS ;
+    static const int TYPE_CHAIN_BUTTON ;
+    static const int TYPE_RELAY_SECOND ;
+    static const int TYPE_BLOCK_RELAY ;
 
 
 

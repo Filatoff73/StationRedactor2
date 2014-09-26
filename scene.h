@@ -27,18 +27,19 @@ public:
         scene_height = height;
     }
 
-    void AddTestBlock();
-    void AddFileBlock();
+    void AddTestBlock(QPoint pos = QPoint(MainElement::GetStepGrid(), MainElement::GetStepGrid()));
+
+    void AddFileBlock(QPoint pos = QPoint(MainElement::GetStepGrid(), MainElement::GetStepGrid()));
     //Считать контакты нового блока из файла
     void ReadContactsFileBlock(QXmlStreamReader& reader, MainElement* elem);
 
-    void AddPoint();
+    void AddPoint(QPoint pos = QPoint(MainElement::GetStepGrid(), MainElement::GetStepGrid()));
 
-    void AddPolus();
+    void AddPolus(QPoint pos = QPoint(MainElement::GetStepGrid(), MainElement::GetStepGrid()));
 
-    void AddRelayContact();
+    void AddRelayContact(QPoint pos = QPoint(MainElement::GetStepGrid(), MainElement::GetStepGrid()));
 
-    void AddRelay();
+    void AddRelay(QPoint pos = QPoint(MainElement::GetStepGrid(), MainElement::GetStepGrid()));
 
     void DeleteElement(MainElement* element);
 

@@ -74,10 +74,10 @@ void RelayContact::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
   if(isLinked && associatedRelay!=NULL)
   {
 
-      if(associatedRelay->getIsVoltage())
-            painter->drawLine(arrContacts.last()->GetPositionContact(), arrContacts[1]->GetPositionContact());
+      if(associatedRelay->getIsVoltage())           
+            painter->drawLine(arrContacts.last()->GetPositionContact(), arrContacts.first()->GetPositionContact());
       else
-          painter->drawLine(arrContacts.last()->GetPositionContact(), arrContacts.first()->GetPositionContact());
+          painter->drawLine(arrContacts.last()->GetPositionContact(), arrContacts[1]->GetPositionContact());
   }
 
 }
@@ -85,8 +85,6 @@ void RelayContact::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 void RelayContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     QMenu myMenu;
-    myMenu.addAction("Вверх");
-    myMenu.addAction("Вниз");
     myMenu.addAction("Влево");
     myMenu.addAction("Вправо");
     myMenu.addAction("Привязать к реле");
@@ -113,22 +111,6 @@ void RelayContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
             isSelectRelayMode=false;
             relayContactSelected=NULL;
             RemoveAssociatedRelay();
-            dynamic_cast<Scene*>(this->scene())->update();
-        }
-
-        if(!txt.compare("Вверх"))
-        {
-            nContactsUp=1;
-            nContactsDown=0;
-            ReDrawContact();
-            dynamic_cast<Scene*>(this->scene())->update();
-        }
-
-        if(!txt.compare("Вниз"))
-        {
-            nContactsUp=0;
-            nContactsDown=1;
-            ReDrawContact();
             dynamic_cast<Scene*>(this->scene())->update();
         }
 

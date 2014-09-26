@@ -28,10 +28,10 @@ BlockRelay::BlockRelay(QGraphicsObject* parent) : MainElement(parent)
 }
 
 
-BlockRelay::BlockRelay(int idElement, int posX, int posY, bool isMirrorGorizontal, bool isMirrorVertical, int sizeX, int sizeY, int nContactsLeft,int nContactsDown,int nContactsRight,int nContactsUp, QString name, QGraphicsObject* parent):
+BlockRelay::BlockRelay(int idElement, int typeElement, int posX, int posY, bool isMirrorGorizontal, bool isMirrorVertical, int sizeX, int sizeY, int nContactsLeft,int nContactsDown,int nContactsRight,int nContactsUp, QString name, QGraphicsObject* parent):
      MainElement( idElement,  posX,  posY,  isMirrorGorizontal,  isMirrorVertical,  sizeX,  sizeY,  nContactsLeft, nContactsDown, nContactsRight, nContactsUp,  name, parent)
 {
-    typeElement = TYPE_BLOCK_RELAY;
+    MainElement::typeElement = typeElement;
     SetContact();
 }
 

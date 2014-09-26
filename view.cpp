@@ -44,6 +44,76 @@ void View::wheelEvent(QWheelEvent* event)
     }
 }
 
+void View::contextMenuEvent (QContextMenuEvent * event)
+{
+    QGraphicsView::contextMenuEvent(event);
+
+    if(event->isAccepted())
+        return;
+
+    QPoint pos = event->pos();
+
+
+    QPoint globalPos = event->globalPos();
+
+    QMenu myMenu;
+    myMenu.addAction("Добавить блок из файла");
+    myMenu.addAction("Добавить тестовый блок");
+    myMenu.addAction("Добавить полюс");
+    myMenu.addAction("Добавить точку");
+    myMenu.addAction("Добавить контакт реле");
+    myMenu.addAction("Добавить внешний контакт");
+
+    QAction* selectedItem = myMenu.exec(globalPos);
+    if (selectedItem)
+    {
+        QString txt = selectedItem->text();
+
+
+        if(!txt.compare("Добавить блок из файла"))
+        {
+            dynamic_cast<Scene*>(this->scene())->AddFileBlock(pos);
+            update();
+        }
+
+        if(!txt.compare("Добавить тестовый блок"))
+        {
+            dynamic_cast<Scene*>(this->scene())->AddTestBlock(pos);
+            update();
+        }
+
+        if(!txt.compare("Добавить полюс"))
+        {
+            dynamic_cast<Scene*>(this->scene())->AddPolus(pos);
+
+            update();
+        }
+
+        if(!txt.compare("Добавить точку"))
+        {
+            dynamic_cast<Scene*>(this->scene())->AddPoint(pos);
+            update();
+        }
+
+        if(!txt.compare("Добавить контакт реле"))
+        {
+            dynamic_cast<Scene*>(this->scene())->AddRelay(pos);
+            update();
+        }
+
+        if(!txt.compare("Добавить внешний контакт"))
+        {
+            dynamic_cast<Scene*>(this->scene())->AddRelayContact(pos);
+            update();
+        }
+
+
+
+    }
+}
+
+
+
 
 void View::keyPressEvent(QKeyEvent *event)
 {
