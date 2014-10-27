@@ -6,6 +6,8 @@
 #include "chainpolus.h"
 #include "relayrelay.h"
 #include "relaycontact.h"
+#include "chainbutton.h"
+#include "relaysecond.h"
 #include <QPushButton>
 #include <QLabel>
 #include <QTextEdit>
@@ -404,12 +406,16 @@ void Scene::setElementParametrs(QXmlStreamAttributes &attrib)
 
     else if(typeElement == MainElement::getTYPE_CHAIN_BUTTON())
     {
-
+        arrElement.append(new ChainButton(idElement, posX, posY, isMirrorGorizontal, isMirrorVertical, sizeX, sizeY, nContactsLeft, nContactsDown, nContactsRight, nContactsUp,name));
+        arrElement.last()->setVisible(true);
+        this->addItem(arrElement.last());
     }
 
     else if(typeElement == MainElement::getTYPE_RELAY_SECOND())
     {
-
+        arrElement.append(new RelaySecond(idElement, posX, posY, isMirrorGorizontal, isMirrorVertical, sizeX, sizeY, nContactsLeft, nContactsDown, nContactsRight, nContactsUp,name));
+        arrElement.last()->setVisible(true);
+        this->addItem(arrElement.last());
     }
 
     else
@@ -428,9 +434,16 @@ void Scene::readOneElement(QXmlStreamReader &reader)
 
     int id=0;
 
+    int type=0;
+
     if(attrib.hasAttribute("idElement"))
     {
         id=attrib.value("idElement").toInt();
+    }
+
+    if(attrib.hasAttribute("typeElement"))
+    {
+        type=attrib.value("typeElement").toInt();
     }
 
        MainElement* element = findElementById(id);
@@ -486,19 +499,23 @@ void Scene::readOneElement(QXmlStreamReader &reader)
 
                      if(attribParametrs.hasAttribute("isLinked"))
                      {
-                         if(attribParametrs.value("isLinked").toInt()==1)
-                         {
-                            dynamic_cast<RelayContact*>(element)->setIsLinked(true);
-                         }
-                         else
-                         {
-                             dynamic_cast<RelayContact*>(element)->setIsLinked(false);
-                         }
+
+                             if(attribParametrs.value("isLinked").toInt()==1)
+                                {
+                                 element->setIsLinked(true);
+                                }
+                             else
+                                {
+                                 element->setIsLinked(false);
+                                }
+
                      }
 
                      if(attribParametrs.hasAttribute("associatedRelay") && attribParametrs.value("associatedRelay").toString()!="")
                      {
-                            dynamic_cast<RelayContact*>(element)->setAssociatedRelay(dynamic_cast<RelayRelay*>(findElementById(attribParametrs.value("associatedRelay").toInt())));
+
+                         element->setAssociatedRelay(dynamic_cast<RelayRelay*>(findElementById(attribParametrs.value("associatedRelay").toInt())));
+
                      }
 
                      if(attribParametrs.hasAttribute("isPlus") )
@@ -1183,6 +1200,73 @@ void Scene::AddPoint(QPoint pos)
     nElement++;
 }
 
+void Scene::AddChainButton(QPoint pos)
+{
+    arrElement.append(new ChainButton());
+    arrElement.last()->setVisible(true);
+    this->addItem(arrElement.last());
+
+    int gridSize = MainElement::GetStepGrid();
+    qreal xV = round(pos.x()/gridSize)*gridSize;
+    qreal yV = round(pos.y()/gridSize)*gridSize;
+
+
+    arrElement.last()->moveBy(xV, yV);
+
+    bool fl = true;
+    while(fl)
+    {
+        fl=false;
+    for(int i=0;i<arrElement.size()-1;i++)
+    {
+        if(arrElement[i]->pos()==arrElement.last()->pos())
+        {
+            arrElement.last()->moveBy(dynamic_cast<MainElement*>(arrElement[i])->getSizeX()*MainElement::GetStepGrid()+MainElement::GetStepGrid(), 0);
+            fl=true;
+
+        }
+    }
+    }
+
+    arrElement.last()->setNameElement(SetStringParamElementDialog(arrElement.last()->getNameElement()));
+
+    nElement++;
+}
+
+void Scene::AddSecondContactRelay(QPoint pos)
+{
+    arrElement.append(new RelaySecond());
+    arrElement.last()->setVisible(true);
+    this->addItem(arrElement.last());
+    int gridSize = MainElement::GetStepGrid();
+    qreal xV = round(pos.x()/gridSize)*gridSize;
+    qreal yV = round(pos.y()/gridSize)*gridSize;
+
+
+    arrElement.last()->moveBy(xV, yV);
+
+    bool fl = true;
+    while(fl)
+    {
+        fl=false;
+    for(int i=0;i<arrElement.size()-1;i++)
+    {
+        if(arrElement[i]->pos()==arrElement.last()->pos())
+        {
+            arrElement.last()->moveBy(dynamic_cast<MainElement*>(arrElement[i])->getSizeX()*MainElement::GetStepGrid()+MainElement::GetStepGrid(), 0);
+            fl=true;
+
+        }
+    }
+    }
+
+
+    arrElement.last()->setNameElement(SetStringParamElementDialog(arrElement.last()->getNameElement()));
+
+
+    nElement++;
+}
+
 void Scene::AddPolus(QPoint pos)
 {
     arrElement.append(new ChainPolus());
@@ -1211,7 +1295,7 @@ void Scene::AddPolus(QPoint pos)
     }
 
 
-arrElement.last()->setNameElement(SetStringParamElementDialog(arrElement.last()->getNameElement()));
+    arrElement.last()->setNameElement(SetStringParamElementDialog(arrElement.last()->getNameElement()));
 
 
     nElement++;
@@ -1292,9 +1376,9 @@ void Scene::DeleteElement(MainElement* element)
     {
         for(int i1=0;i1<arrElement.size();i1++)
         {
-            if(dynamic_cast<RelayContact*>(arrElement[i1])!=NULL && dynamic_cast<RelayContact*>(arrElement[i1])->getAssociatedRelay()==element)
+            if(arrElement[i1]->getAssociatedRelay()==element)
             {
-                dynamic_cast<RelayContact*>(arrElement[i1])->RemoveAssociatedRelay();
+                arrElement[i1]->RemoveAssociatedRelay();
             }
         }
     }

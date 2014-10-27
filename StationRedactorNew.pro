@@ -22,7 +22,9 @@ SOURCES += main.cpp\
     chainpoint.cpp \
     chainpolus.cpp \
     relayrelay.cpp \
-    relaycontact.cpp
+    relaycontact.cpp \
+    chainbutton.cpp \
+    relaysecond.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -33,6 +35,8 @@ HEADERS  += mainwindow.h \
     chainpoint.h \
     chainpolus.h \
     relayrelay.h \
-    relaycontact.h
+    relaycontact.h \
+    chainbutton.h \
+    relaysecond.h
 
 FORMS    += mainwindow.ui

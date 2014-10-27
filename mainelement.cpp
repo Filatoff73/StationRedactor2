@@ -10,6 +10,7 @@
 #include <blockrelay.h>
 #include <relayrelay.h>
 #include <relaycontact.h>
+#include <relaysecond.h>
 #include <QErrorMessage>
 #include <QGraphicsView>
 
@@ -18,7 +19,7 @@ int MainElement::rad=0;
 bool MainElement::isSelectRelayMode=false;
 int MainElement::widthLinesElements=2;
 int MainElement::widthLinesContacts=1;
-RelayContact* MainElement::relayContactSelected=NULL;
+MainElement* MainElement::relayContactSelected=NULL;
 
 
  const int MainElement::TYPE_CHAIN_POINT=0;
@@ -129,6 +130,7 @@ void MainElement::mousePressEvent(QGraphicsSceneMouseEvent *event)
         {
             if(CreateDialog("Привязать контакт реле к реле?"))
             {
+
                 relayContactSelected->setAssociatedRelay(dynamic_cast<RelayRelay*>(this));
                 relayContactSelected->setNameElement(this->getNameElement());
                 relayContactSelected->setIsLinked(true);
@@ -146,6 +148,7 @@ void MainElement::mousePressEvent(QGraphicsSceneMouseEvent *event)
         }
 
         relayContactSelected->setIsProcessLinked(false);
+
         relayContactSelected=NULL;
         isSelectRelayMode=false;
 
@@ -325,26 +328,40 @@ int MainElement::getTYPE_BLOCK_RELAY()
     return TYPE_BLOCK_RELAY;
 }
 
+RelayRelay* MainElement::getAssociatedRelay() const
+{
+    return NULL;
+}
 
+void MainElement::setAssociatedRelay(RelayRelay *value)
+{
+    return;
+}
 
+bool MainElement::getIsLinked() const
+{
+    return false;
+}
 
+void MainElement::setIsLinked(bool value)
+{
+    return;
+}
 
+bool MainElement::getIsProcessLinked() const
+{
+    return false;
+}
 
+void MainElement::setIsProcessLinked(bool value)
+{
+    return;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void MainElement::RemoveAssociatedRelay()
+{
+    return;
+}
 
 
 QRectF MainElement::boundingRect() const
@@ -578,3 +595,4 @@ MainElement::~MainElement()
 
     delete question;
 }
+

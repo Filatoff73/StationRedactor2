@@ -59,10 +59,12 @@ void View::contextMenuEvent (QContextMenuEvent * event)
     QMenu myMenu;
     myMenu.addAction("Добавить блок из файла");
     myMenu.addAction("Добавить тестовый блок");
+    myMenu.addAction("Добавить кнопку");
     myMenu.addAction("Добавить полюс");
     myMenu.addAction("Добавить точку");
     myMenu.addAction("Добавить контакт реле");
     myMenu.addAction("Добавить внешний контакт");
+    myMenu.addAction("Добавить вторую обмотку");
 
     QAction* selectedItem = myMenu.exec(globalPos);
     if (selectedItem)
@@ -79,6 +81,18 @@ void View::contextMenuEvent (QContextMenuEvent * event)
         if(!txt.compare("Добавить тестовый блок"))
         {
             dynamic_cast<Scene*>(this->scene())->AddTestBlock(pos);
+            update();
+        }
+
+        if(!txt.compare("Добавить вторую обмотку"))
+        {
+            dynamic_cast<Scene*>(this->scene())->AddSecondContactRelay(pos);
+            update();
+        }
+
+        if(!txt.compare("Добавить кнопку"))
+        {
+            dynamic_cast<Scene*>(this->scene())->AddChainButton(pos);
             update();
         }
 

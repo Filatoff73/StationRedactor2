@@ -20,7 +20,9 @@
 #include <qxmlstream.h>
 #define SCALE 1.1
 
-class RelayContact;
+
+class MainElement;
+class RelayRelay;
 class MainElement : public QGraphicsObject
 {
 
@@ -59,7 +61,6 @@ public:
     {
         return STEP_GRID;
     }
-
 
 
     int getSizeX() const;
@@ -112,6 +113,20 @@ public:
 
     static int getTYPE_BLOCK_RELAY();
 
+
+   virtual  RelayRelay *getAssociatedRelay() const;
+   virtual void setAssociatedRelay(RelayRelay *value);
+
+   virtual bool getIsLinked() const;
+   virtual void setIsLinked(bool value);
+
+   virtual bool getIsProcessLinked() const;
+   virtual void setIsProcessLinked(bool value);
+
+   virtual void RemoveAssociatedRelay(void);
+
+
+
 protected:
     static int STEP_GRID;
     static int rad;
@@ -138,7 +153,7 @@ protected:
     QDialog* question;
 
     static bool isSelectRelayMode;
-    static RelayContact* relayContactSelected;
+    static MainElement* relayContactSelected;
 
 
 

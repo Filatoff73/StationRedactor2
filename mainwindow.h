@@ -32,6 +32,8 @@ private slots:
     void AddFileBlockButton();
     void AddPointButton();
     void AddPolus();
+    void AddButton();
+    void AddSecondContactRelay();
     void AddRelay();
     void AddRelayContact();
     void DeleteConnection();

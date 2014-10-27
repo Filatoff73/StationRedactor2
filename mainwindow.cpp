@@ -32,8 +32,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->addTestBlock, SIGNAL(clicked()), this, SLOT(AddTestBlockButton()));
     connect(ui->addFileBlock, SIGNAL(clicked()), this, SLOT(AddFileBlockButton()));
     connect(ui->addPoint, SIGNAL(clicked()), this, SLOT(AddPointButton()));
+    connect(ui->addSecondContactRelay, SIGNAL(clicked()), this, SLOT(AddSecondContactRelay()));
     connect(ui->addPolus, SIGNAL(clicked()), this, SLOT(AddPolus()));
     connect(ui->addRelay, SIGNAL(clicked()), this, SLOT(AddRelay()));
+    connect(ui->addButton, SIGNAL(clicked()), this, SLOT(AddButton()));
     connect(ui->addContactRelay, SIGNAL(clicked()), this, SLOT(AddRelayContact()));
     connect(ui->deleteConnection, SIGNAL(clicked()), this, SLOT(DeleteConnection()));
     connect(ui->widthLines, SIGNAL(clicked()), this, SLOT(WidthLines()));
@@ -66,6 +68,16 @@ void MainWindow::AddPointButton()
 void MainWindow::AddPolus()
 {
     scene->AddPolus();
+}
+
+void MainWindow::AddButton()
+{
+    scene->AddChainButton();
+}
+
+void MainWindow::AddSecondContactRelay()
+{
+    scene->AddSecondContactRelay();
 }
 
 void MainWindow::AddRelay()

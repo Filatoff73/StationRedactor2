@@ -35,6 +35,10 @@ public:
 
     void AddPoint(QPoint pos = QPoint(MainElement::GetStepGrid(), MainElement::GetStepGrid()));
 
+    void AddChainButton(QPoint pos = QPoint(MainElement::GetStepGrid(), MainElement::GetStepGrid()));
+
+    void AddSecondContactRelay(QPoint pos = QPoint(MainElement::GetStepGrid(), MainElement::GetStepGrid()));
+
     void AddPolus(QPoint pos = QPoint(MainElement::GetStepGrid(), MainElement::GetStepGrid()));
 
     void AddRelayContact(QPoint pos = QPoint(MainElement::GetStepGrid(), MainElement::GetStepGrid()));

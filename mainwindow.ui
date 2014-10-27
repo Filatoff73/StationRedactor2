@@ -100,6 +100,13 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="addButton">
+           <property name="text">
+            <string>Добавить кнопку</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="addPoint">
            <property name="text">
             <string>Добавить точку</string>
@@ -124,6 +131,13 @@
           <widget class="QPushButton" name="addContactRelay">
            <property name="text">
             <string>Добавить контакт реле</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="addSecondContactRelay">
+           <property name="text">
+            <string>Добавить вторую обмотку</string>
            </property>
           </widget>
          </item>
