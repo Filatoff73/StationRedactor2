@@ -138,7 +138,7 @@ void MainWindow::save()
 void MainWindow::saveAs()
 {
     QString fileName = QFileDialog::getSaveFileName(this,
-             tr("Сохранить блок"), saveDir, "*.station");
+             tr("Сохранить бмрц станции"), saveDir, "*.station");
 
     if(!fileName.compare(""))
         return;
@@ -161,7 +161,7 @@ void MainWindow::saveAs()
 void MainWindow::open()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
-             tr("Открыть станцию"), saveDir, "*.station");
+             tr("Открыть бмрц станции"), saveDir, "*.station");
 
     if(!fileName.compare(""))
         return;
@@ -177,6 +177,59 @@ void MainWindow::open()
     f.close();
 
     view->InitViewVariable();
+}
+
+void MainWindow::openStation()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+             tr("Открыть станцию"), saveDir, "*.xml");
+
+
+    if(!fileName.compare(""))
+        return;
+
+    QDir dir(fileName);
+    saveDir = dir.absolutePath();
+
+    QFile f(saveDir);
+    if (!f.open(QIODevice::ReadOnly | QIODevice::Text))
+             return;
+    /////////////////////////////////
+
+    saveDir.clear();
+
+    fileName = QFileDialog::getSaveFileName(this,
+             tr("Сохранить бмрц станции"), saveDir, "*.station");
+
+    if(!fileName.compare(""))
+        return;
+
+
+    if(fileName.mid(fileName.size() - 8).compare(".station"))
+        fileName += ".station";
+
+    dir.setPath(fileName);
+    saveDir = dir.absolutePath();
+
+    QFile f2(saveDir);
+    if (!f2.open(QIODevice::WriteOnly | QIODevice::Text))
+             return;
+
+    /////////////////////////////////////
+
+    scene->generateStation(f,f2);
+    f.close();
+    f2.close();
+
+    if (!f2.open(QIODevice::ReadOnly | QIODevice::Text))
+             return;
+
+    scene->openFile(f2);
+    view->InitViewVariable();
+
+    f2.close();
+
+
 }
 
 
@@ -205,6 +258,11 @@ void MainWindow::MenuBarFunc(QAction *act)
         if(!txt.compare("Сохранить как"))
         {
             saveAs();
+        }
+
+        if(!txt.compare("Сгенерировать БМРЦ станции"))
+        {
+            openStation();
         }
 
 

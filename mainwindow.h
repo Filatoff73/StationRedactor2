@@ -20,6 +20,7 @@ public:
     void save();
     void saveAs();
     void open();
+    void openStation();
 
 private:
     Ui::MainWindow *ui;

@@ -1,0 +1,4643 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Station
+	Center="41, 17">
+	<Settings
+		elem_size="60"
+		sema_width="9"
+		PenSize="3"
+		idCounter="377" />
+	<Chain
+		id="1">
+		<DeadEnd
+			Angle="180"
+			Center="4, 11"
+			ChainLabel="М2П"
+			HaveMustache="False"
+			height="2"
+			id="0"
+			isElementInRightPart="True"
+			real_length="300"
+			width="4"
+			isDeadEnd="False">
+			<Neighbours>
+				<Neighbour
+					id="2"
+					feature="NONE"
+					num="0" />
+			</Neighbours>
+			<Signals />
+		</DeadEnd>
+	</Chain>
+	<Chain
+		id="3">
+		<PathPart
+			Angle="0"
+			Center="7, 11"
+			ChainLabel="2ПП"
+			HaveMustache="True"
+			height="2"
+			id="2"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="0"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="4"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="240, 285,7883"
+					master_chain="3"
+					master_abstract_chain="2"
+					props="undersized"
+					semDir="RIGHT"
+					semLabel="М3"
+					semType="MANEUVER"
+					id="334"
+					num="1" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="5">
+		<PathPart
+			Angle="0"
+			Center="9, 11"
+			ChainLabel="3ПП"
+			HaveMustache="True"
+			height="2"
+			id="4"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="2"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="8"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="300, 285,7883"
+					master_chain="5"
+					master_abstract_chain="4"
+					props="undersized"
+					semDir="RIGHT"
+					semLabel="М5"
+					semType="MANEUVER"
+					id="336"
+					num="1" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="7">
+		<Commutator
+			Angle="180"
+			Center="12, 13"
+			ChainLabel="9"
+			HaveMustache="True"
+			height="2"
+			id="6"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="16"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="12"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="8"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="9">
+		<Commutator
+			Angle="0"
+			Center="11, 11"
+			ChainLabel="5"
+			HaveMustache="True"
+			height="2"
+			id="8"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="True"
+			Autoreset_default="PLUS"
+			Autoreset_time="10"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="4"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="6"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="13">
+		<PathPart
+			Angle="0"
+			Center="7, 13"
+			ChainLabel="4ПП"
+			HaveMustache="True"
+			height="2"
+			id="12"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="14"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="6"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="285, 337,7499"
+					master_chain="13"
+					master_abstract_chain="12"
+					props="undersized"
+					semDir="RIGHT"
+					semLabel="М9"
+					semType="MANEUVER"
+					id="337"
+					num="1" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="15">
+		<Approximation
+			Angle="0"
+			Center="3, 13"
+			ChainLabel="4П_УП"
+			HaveMustache="False"
+			height="2"
+			id="14"
+			isElementInRightPart="True"
+			real_length="1000"
+			width="2"
+			direction="RIGHT"
+			have_uksps="True">
+			<Neighbours>
+				<Neighbour
+					id="12"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="120, 337,7499"
+					master_chain="15"
+					master_abstract_chain="14"
+					props="40"
+					semDir="RIGHT"
+					semLabel="4П"
+					semType="PATH"
+					id="293"
+					num="1" />
+			</Signals>
+		</Approximation>
+	</Chain>
+	<Chain
+		id="17">
+		<Commutator
+			Angle="180"
+			Center="14, 13"
+			ChainLabel="17"
+			HaveMustache="True"
+			height="2"
+			id="16"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="60"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="6"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="18"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="19">
+		<Commutator
+			Angle="0"
+			Center="13, 15"
+			ChainLabel="13"
+			HaveMustache="True"
+			height="2"
+			id="18"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="22"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="98"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="16"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="25">
+		<PathPart
+			Angle="0"
+			Center="7, 15"
+			ChainLabel="5ПП"
+			HaveMustache="True"
+			height="2"
+			id="24"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="26"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="20"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="240, 389,7114"
+					master_chain="25"
+					master_abstract_chain="24"
+					props="undersized"
+					semDir="RIGHT"
+					semLabel="М11"
+					semType="MANEUVER"
+					id="338"
+					num="1" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="27">
+		<Approximation
+			Angle="0"
+			Center="3, 15"
+			ChainLabel="5П_УП"
+			HaveMustache="False"
+			height="2"
+			id="26"
+			isElementInRightPart="True"
+			real_length="1000"
+			width="2"
+			direction="LEFT"
+			have_uksps="True">
+			<Neighbours>
+				<Neighbour
+					id="24"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="120, 389,7114"
+					master_chain="27"
+					master_abstract_chain="26"
+					props="40"
+					semDir="RIGHT"
+					semLabel="5П"
+					semType="PATH"
+					id="294"
+					num="1" />
+			</Signals>
+		</Approximation>
+	</Chain>
+	<Chain
+		id="32">
+		<Commutator
+			Angle="0"
+			Center="11, 15"
+			ChainLabel="7"
+			HaveMustache="True"
+			height="2"
+			id="22"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="20"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="18"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="106"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+		<Commutator
+			Angle="180"
+			Center="9, 15"
+			ChainLabel="3"
+			HaveMustache="True"
+			height="2"
+			id="20"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="22"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="24"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="104"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="61">
+		<Commutator
+			Angle="0"
+			Center="16, 13"
+			ChainLabel="21"
+			HaveMustache="True"
+			height="2"
+			id="60"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="16"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="64"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="62"
+					feature="OVERSIZED"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="63">
+		<Commutator
+			Angle="300"
+			Center="19, 7"
+			ChainLabel="31"
+			HaveMustache="True"
+			height="2"
+			id="62"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="60"
+					feature="OVERSIZED"
+					num="0" />
+				<Neighbour
+					id="68"
+					feature="OVERSIZED"
+					num="1" />
+				<Neighbour
+					id="74"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="65">
+		<Commutator
+			Angle="0"
+			Center="18, 13"
+			ChainLabel="27"
+			HaveMustache="True"
+			height="2"
+			id="64"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="60"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="84"
+					feature="OVERSIZED"
+					num="1" />
+				<Neighbour
+					id="66"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="67">
+		<Commutator
+			Angle="0"
+			Center="21, 9"
+			ChainLabel="39"
+			HaveMustache="True"
+			height="2"
+			id="66"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="64"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="80"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="82"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="69">
+		<Commutator
+			Angle="300"
+			Center="21, 3"
+			ChainLabel="41"
+			HaveMustache="True"
+			height="2"
+			id="68"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="62"
+					feature="OVERSIZED"
+					num="0" />
+				<Neighbour
+					id="70"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="72"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="71">
+		<Path
+			Angle="0"
+			Center="36, 1"
+			ChainLabel="18П"
+			HaveMustache="False"
+			height="2"
+			id="70"
+			isElementInRightPart="True"
+			real_length="500"
+			width="24">
+			<Neighbours>
+				<Neighbour
+					id="68"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="176"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="720, 25,98076"
+					master_chain="71"
+					master_abstract_chain="70"
+					props="72"
+					semDir="LEFT"
+					semLabel="Ч18"
+					semType="PATH"
+					id="295"
+					num="0" />
+				<Signal
+					Center="1440, 25,98076"
+					master_chain="71"
+					master_abstract_chain="70"
+					props="72"
+					semDir="RIGHT"
+					semLabel="Н18"
+					semType="PATH"
+					id="296"
+					num="1" />
+			</Signals>
+		</Path>
+	</Chain>
+	<Chain
+		id="73">
+		<Path
+			Angle="0"
+			Center="36, 3"
+			ChainLabel="2П"
+			HaveMustache="False"
+			height="2"
+			id="72"
+			isElementInRightPart="True"
+			real_length="500"
+			width="24">
+			<Neighbours>
+				<Neighbour
+					id="68"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="176"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="720, 77,94228"
+					master_chain="73"
+					master_abstract_chain="72"
+					props="72"
+					semDir="LEFT"
+					semLabel="Ч2"
+					semType="PATH"
+					id="297"
+					num="0" />
+				<Signal
+					Center="1440, 77,94228"
+					master_chain="73"
+					master_abstract_chain="72"
+					props="72"
+					semDir="RIGHT"
+					semLabel="Н2"
+					semType="PATH"
+					id="298"
+					num="1" />
+			</Signals>
+		</Path>
+	</Chain>
+	<Chain
+		id="75">
+		<Commutator
+			Angle="0"
+			Center="22, 7"
+			ChainLabel="47"
+			HaveMustache="True"
+			height="2"
+			id="74"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="62"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="78"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="76"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="77">
+		<Path
+			Angle="0"
+			Center="35, 5"
+			ChainLabel="4П"
+			HaveMustache="False"
+			height="2"
+			id="76"
+			isElementInRightPart="True"
+			real_length="500"
+			width="22">
+			<Neighbours>
+				<Neighbour
+					id="74"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="178"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="720, 129,9038"
+					master_chain="77"
+					master_abstract_chain="76"
+					props="72"
+					semDir="LEFT"
+					semLabel="Ч4"
+					semType="PATH"
+					id="299"
+					num="0" />
+				<Signal
+					Center="1380, 129,9038"
+					master_chain="77"
+					master_abstract_chain="76"
+					props="72"
+					semDir="RIGHT"
+					semLabel="Н4"
+					semType="PATH"
+					id="300"
+					num="1" />
+			</Signals>
+		</Path>
+	</Chain>
+	<Chain
+		id="79">
+		<Path
+			Angle="0"
+			Center="35, 7"
+			ChainLabel="6П"
+			HaveMustache="False"
+			height="2"
+			id="78"
+			isElementInRightPart="True"
+			real_length="500"
+			width="22">
+			<Neighbours>
+				<Neighbour
+					id="74"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="178"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="720, 181,8653"
+					master_chain="79"
+					master_abstract_chain="78"
+					props="72"
+					semDir="LEFT"
+					semLabel="Ч6"
+					semType="PATH"
+					id="301"
+					num="0" />
+				<Signal
+					Center="1380, 181,8653"
+					master_chain="79"
+					master_abstract_chain="78"
+					props="72"
+					semDir="RIGHT"
+					semLabel="Н6"
+					semType="PATH"
+					id="302"
+					num="1" />
+			</Signals>
+		</Path>
+	</Chain>
+	<Chain
+		id="81">
+		<Path
+			Angle="0"
+			Center="36, 9"
+			ChainLabel="8П"
+			HaveMustache="False"
+			height="2"
+			id="80"
+			isElementInRightPart="True"
+			real_length="500"
+			width="24">
+			<Neighbours>
+				<Neighbour
+					id="66"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="180"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="720, 233,8268"
+					master_chain="81"
+					master_abstract_chain="80"
+					props="72"
+					semDir="LEFT"
+					semLabel="Ч8"
+					semType="PATH"
+					id="303"
+					num="0" />
+				<Signal
+					Center="1440, 233,8268"
+					master_chain="81"
+					master_abstract_chain="80"
+					props="72"
+					semDir="RIGHT"
+					semLabel="Н8"
+					semType="PATH"
+					id="304"
+					num="1" />
+			</Signals>
+		</Path>
+	</Chain>
+	<Chain
+		id="83">
+		<Path
+			Angle="0"
+			Center="36, 11"
+			ChainLabel="10П"
+			HaveMustache="False"
+			height="2"
+			id="82"
+			isElementInRightPart="True"
+			real_length="500"
+			width="24">
+			<Neighbours>
+				<Neighbour
+					id="66"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="182"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="720, 285,7883"
+					master_chain="83"
+					master_abstract_chain="82"
+					props="72"
+					semDir="LEFT"
+					semLabel="Ч10"
+					semType="PATH"
+					id="305"
+					num="0" />
+				<Signal
+					Center="1440, 285,7883"
+					master_chain="83"
+					master_abstract_chain="82"
+					props="72"
+					semDir="RIGHT"
+					semLabel="Н10"
+					semType="PATH"
+					id="306"
+					num="1" />
+			</Signals>
+		</Path>
+	</Chain>
+	<Chain
+		id="85">
+		<Commutator
+			Angle="180"
+			Center="22, 13"
+			ChainLabel="49"
+			HaveMustache="True"
+			height="2"
+			id="84"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="86"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="64"
+					feature="OVERSIZED"
+					num="1" />
+				<Neighbour
+					id="88"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="87">
+		<PathPart
+			Angle="0"
+			Center="26, 13"
+			ChainLabel="8ПП"
+			HaveMustache="True"
+			height="2"
+			id="86"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="84"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="92"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="720, 337,7499"
+					master_chain="87"
+					master_abstract_chain="86"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М49"
+					semType="MANEUVER"
+					id="339"
+					num="0" />
+				<Signal
+					Center="855, 337,7499"
+					master_chain="87"
+					master_abstract_chain="86"
+					props="undersized"
+					semDir="RIGHT"
+					semLabel="М63"
+					semType="MANEUVER"
+					id="340"
+					num="1" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="89">
+		<Commutator
+			Angle="0"
+			Center="21, 15"
+			ChainLabel="43"
+			HaveMustache="True"
+			height="2"
+			id="88"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="98"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="90"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="84"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="91">
+		<PathPart
+			Angle="0"
+			Center="25, 15"
+			ChainLabel="9ПП"
+			HaveMustache="True"
+			height="2"
+			id="90"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="88"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="94"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="690, 389,7114"
+					master_chain="91"
+					master_abstract_chain="90"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М43"
+					semType="MANEUVER"
+					id="341"
+					num="0" />
+				<Signal
+					Center="825, 389,7114"
+					master_chain="91"
+					master_abstract_chain="90"
+					props="undersized"
+					semDir="RIGHT"
+					semLabel="М61"
+					semType="MANEUVER"
+					id="342"
+					num="1" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="93">
+		<Commutator
+			Angle="180"
+			Center="31, 13"
+			ChainLabel="65"
+			HaveMustache="True"
+			height="2"
+			id="92"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="203"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="86"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="94"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="95">
+		<Commutator
+			Angle="0"
+			Center="30, 15"
+			ChainLabel="61"
+			HaveMustache="True"
+			height="2"
+			id="94"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="90"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="225"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="92"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="99">
+		<Commutator
+			Angle="180"
+			Center="19, 15"
+			ChainLabel="33"
+			HaveMustache="True"
+			height="2"
+			id="98"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="88"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="18"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="112"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="101">
+		<Approximation
+			Angle="0"
+			Center="3, 17"
+			ChainLabel="11П_УП"
+			HaveMustache="False"
+			height="2"
+			id="100"
+			isElementInRightPart="True"
+			real_length="1000"
+			width="2"
+			direction="LEFT"
+			have_uksps="True">
+			<Neighbours>
+				<Neighbour
+					id="102"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="120, 441,6729"
+					master_chain="101"
+					master_abstract_chain="100"
+					props="40"
+					semDir="RIGHT"
+					semLabel="11П"
+					semType="PATH"
+					id="307"
+					num="1" />
+			</Signals>
+		</Approximation>
+	</Chain>
+	<Chain
+		id="103">
+		<PathPart
+			Angle="0"
+			Center="5, 17"
+			ChainLabel="11ПП"
+			HaveMustache="True"
+			height="2"
+			id="102"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="100"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="104"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="195, 441,6729"
+					master_chain="103"
+					master_abstract_chain="102"
+					props="undersized"
+					semDir="RIGHT"
+					semLabel="М65"
+					semType="MANEUVER"
+					id="343"
+					num="1" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="105">
+		<Commutator
+			Angle="0"
+			Center="8, 17"
+			ChainLabel="1"
+			HaveMustache="True"
+			height="2"
+			id="104"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="102"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="106"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="20"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="107">
+		<Commutator
+			Angle="180"
+			Center="12, 17"
+			ChainLabel="11"
+			HaveMustache="True"
+			height="2"
+			id="106"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="110"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="104"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="22"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="109">
+		<Commutator
+			Angle="0"
+			Center="16, 17"
+			ChainLabel="23"
+			HaveMustache="True"
+			height="2"
+			id="108"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="110"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="112"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="124"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="111">
+		<Commutator
+			Angle="180"
+			Center="14, 17"
+			ChainLabel="19"
+			HaveMustache="True"
+			height="2"
+			id="110"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="108"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="106"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="122"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="113">
+		<Commutator
+			Angle="0"
+			Center="18, 17"
+			ChainLabel="29"
+			HaveMustache="True"
+			height="2"
+			id="112"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="108"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="114"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="98"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="115">
+		<Commutator
+			Angle="0"
+			Center="20, 17"
+			ChainLabel="37"
+			HaveMustache="True"
+			height="2"
+			id="114"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="112"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="116"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="130"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="117">
+		<PathPart
+			Angle="0"
+			Center="25, 17"
+			ChainLabel="12ПП"
+			HaveMustache="True"
+			height="2"
+			id="116"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="114"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="118"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="675, 441,6729"
+					master_chain="117"
+					master_abstract_chain="116"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М37"
+					semType="MANEUVER"
+					id="344"
+					num="0" />
+				<Signal
+					Center="825, 441,6729"
+					master_chain="117"
+					master_abstract_chain="116"
+					props="undersized"
+					semDir="RIGHT"
+					semLabel="М67"
+					semType="MANEUVER"
+					id="345"
+					num="1" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="119">
+		<Commutator
+			Angle="0"
+			Center="30, 17"
+			ChainLabel="63"
+			HaveMustache="True"
+			height="2"
+			id="118"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="116"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="239"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="136"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="121">
+		<DeadEnd
+			Angle="180"
+			Center="10, 19"
+			ChainLabel="М4П"
+			HaveMustache="False"
+			height="2"
+			id="120"
+			isElementInRightPart="True"
+			real_length="300"
+			width="4"
+			isDeadEnd="True">
+			<Neighbours>
+				<Neighbour
+					id="122"
+					feature="NONE"
+					num="0" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="360,0001, 493,6342"
+					master_chain="121"
+					master_abstract_chain="120"
+					props="undersized"
+					semDir="RIGHT"
+					semLabel="М15"
+					semType="MANEUVER"
+					id="346"
+					num="0" />
+			</Signals>
+		</DeadEnd>
+	</Chain>
+	<Chain
+		id="123">
+		<Commutator
+			Angle="0"
+			Center="13, 19"
+			ChainLabel="15"
+			HaveMustache="True"
+			height="2"
+			id="122"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="120"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="126"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="110"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="125">
+		<Commutator
+			Angle="180"
+			Center="17, 19"
+			ChainLabel="25"
+			HaveMustache="True"
+			height="2"
+			id="124"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="128"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="126"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="108"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="127">
+		<PathPart
+			Angle="0"
+			Center="15, 19"
+			ChainLabel="13ПП"
+			HaveMustache="True"
+			height="2"
+			id="126"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="122"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="124"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="420, 493,6344"
+					master_chain="127"
+					master_abstract_chain="126"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М69"
+					semType="MANEUVER"
+					id="347"
+					num="0" />
+				<Signal
+					Center="479,9999, 493,6344"
+					master_chain="127"
+					master_abstract_chain="126"
+					props="undersized"
+					semDir="RIGHT"
+					semLabel="М25"
+					semType="MANEUVER"
+					id="348"
+					num="1" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="129">
+		<Commutator
+			Angle="0"
+			Center="19, 19"
+			ChainLabel="35"
+			HaveMustache="True"
+			height="2"
+			id="128"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="124"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="130"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="140"
+					feature="OVERSIZED"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="131">
+		<Commutator
+			Angle="180"
+			Center="21, 19"
+			ChainLabel="45"
+			HaveMustache="True"
+			height="2"
+			id="130"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="132"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="128"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="114"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="133">
+		<Commutator
+			Angle="0"
+			Center="23, 19"
+			ChainLabel="53"
+			HaveMustache="True"
+			height="2"
+			id="132"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="130"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="134"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="142"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="135">
+		<PathPart
+			Angle="0"
+			Center="27, 19"
+			ChainLabel="14ПП"
+			HaveMustache="True"
+			height="2"
+			id="134"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="132"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="136"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="749,9999, 493,6344"
+					master_chain="135"
+					master_abstract_chain="134"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М53"
+					semType="MANEUVER"
+					id="349"
+					num="0" />
+				<Signal
+					Center="869,9999, 493,6344"
+					master_chain="135"
+					master_abstract_chain="134"
+					props="undersized"
+					semDir="RIGHT"
+					semLabel="М71"
+					semType="MANEUVER"
+					id="350"
+					num="1" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="137">
+		<Commutator
+			Angle="180"
+			Center="31, 19"
+			ChainLabel="67"
+			HaveMustache="True"
+			height="2"
+			id="136"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="138"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="134"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="118"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="139">
+		<PathPart
+			Angle="0"
+			Center="36, 19"
+			ChainLabel="15ПП"
+			HaveMustache="True"
+			height="2"
+			id="138"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="136"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="150"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="1004,999, 493,6344"
+					master_chain="139"
+					master_abstract_chain="138"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М73"
+					semType="MANEUVER"
+					id="351"
+					num="0" />
+				<Signal
+					Center="1140, 493,6345"
+					master_chain="139"
+					master_abstract_chain="138"
+					props="undersized"
+					semDir="RIGHT"
+					semLabel="М81"
+					semType="MANEUVER"
+					id="352"
+					num="1" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="141">
+		<Commutator
+			Angle="60"
+			Center="22, 25"
+			ChainLabel="51"
+			HaveMustache="True"
+			height="2"
+			id="140"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="128"
+					feature="OVERSIZED"
+					num="0" />
+				<Neighbour
+					id="164"
+					feature="OVERSIZED"
+					num="1" />
+				<Neighbour
+					id="160"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="143">
+		<Commutator
+			Angle="60"
+			Center="24, 21"
+			ChainLabel="55"
+			HaveMustache="True"
+			height="2"
+			id="142"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="132"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="146"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="144"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="145">
+		<Path
+			Angle="0"
+			Center="30, 21"
+			ChainLabel="1П"
+			HaveMustache="False"
+			height="2"
+			id="144"
+			isElementInRightPart="True"
+			real_length="500"
+			width="8">
+			<Neighbours>
+				<Neighbour
+					id="142"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="148"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="780, 545,5959"
+					master_chain="145"
+					master_abstract_chain="144"
+					props="72"
+					semDir="LEFT"
+					semLabel="Ч1"
+					semType="PATH"
+					id="308"
+					num="0" />
+				<Signal
+					Center="1020, 545,5959"
+					master_chain="145"
+					master_abstract_chain="144"
+					props="72"
+					semDir="RIGHT"
+					semLabel="Н1"
+					semType="PATH"
+					id="309"
+					num="1" />
+			</Signals>
+		</Path>
+	</Chain>
+	<Chain
+		id="147">
+		<Path
+			Angle="0"
+			Center="30, 23"
+			ChainLabel="3П"
+			HaveMustache="False"
+			height="2"
+			id="146"
+			isElementInRightPart="True"
+			real_length="500"
+			width="8">
+			<Neighbours>
+				<Neighbour
+					id="142"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="156"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="780, 597,5575"
+					master_chain="147"
+					master_abstract_chain="146"
+					props="72"
+					semDir="LEFT"
+					semLabel="Ч3"
+					semType="PATH"
+					id="310"
+					num="0" />
+				<Signal
+					Center="1020, 597,5575"
+					master_chain="147"
+					master_abstract_chain="146"
+					props="72"
+					semDir="RIGHT"
+					semLabel="Н3"
+					semType="PATH"
+					id="311"
+					num="1" />
+			</Signals>
+		</Path>
+	</Chain>
+	<Chain
+		id="149">
+		<Commutator
+			Angle="180"
+			Center="37, 21"
+			ChainLabel="75"
+			HaveMustache="True"
+			height="2"
+			id="148"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="152"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="144"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="156"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="151">
+		<Commutator
+			Angle="180"
+			Center="40, 19"
+			ChainLabel="81"
+			HaveMustache="True"
+			height="2"
+			id="150"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="253"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="138"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="152"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="153">
+		<Commutator
+			Angle="0"
+			Center="39, 21"
+			ChainLabel="79"
+			HaveMustache="True"
+			height="2"
+			id="152"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="148"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="154"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="150"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="155">
+		<Commutator
+			Angle="180"
+			Center="42, 21"
+			ChainLabel="62"
+			HaveMustache="True"
+			height="2"
+			id="154"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="275"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="152"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="174"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="157">
+		<Commutator
+			Angle="120"
+			Center="36, 23"
+			ChainLabel="71"
+			HaveMustache="True"
+			height="2"
+			id="156"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="148"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="158"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="146"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="159">
+		<Path
+			Angle="0"
+			Center="30, 25"
+			ChainLabel="5П"
+			HaveMustache="False"
+			height="2"
+			id="158"
+			isElementInRightPart="True"
+			real_length="500"
+			width="8">
+			<Neighbours>
+				<Neighbour
+					id="160"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="156"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="780, 649,519"
+					master_chain="159"
+					master_abstract_chain="158"
+					props="72"
+					semDir="LEFT"
+					semLabel="Ч5"
+					semType="PATH"
+					id="312"
+					num="0" />
+				<Signal
+					Center="1020, 649,519"
+					master_chain="159"
+					master_abstract_chain="158"
+					props="72"
+					semDir="RIGHT"
+					semLabel="Н5"
+					semType="PATH"
+					id="313"
+					num="1" />
+			</Signals>
+		</Path>
+	</Chain>
+	<Chain
+		id="161">
+		<Commutator
+			Angle="0"
+			Center="25, 25"
+			ChainLabel="59"
+			HaveMustache="True"
+			height="2"
+			id="160"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="140"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="158"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="162"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="163">
+		<Path
+			Angle="0"
+			Center="29, 27"
+			ChainLabel="7П"
+			HaveMustache="False"
+			height="2"
+			id="162"
+			isElementInRightPart="True"
+			real_length="500"
+			width="4">
+			<Neighbours>
+				<Neighbour
+					id="160"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="170"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="810, 701,4805"
+					master_chain="163"
+					master_abstract_chain="162"
+					props="72"
+					semDir="LEFT"
+					semLabel="Ч7"
+					semType="PATH"
+					id="314"
+					num="0" />
+				<Signal
+					Center="930, 701,4805"
+					master_chain="163"
+					master_abstract_chain="162"
+					props="72"
+					semDir="RIGHT"
+					semLabel="Н7"
+					semType="PATH"
+					id="315"
+					num="1" />
+			</Signals>
+		</Path>
+	</Chain>
+	<Chain
+		id="165">
+		<Commutator
+			Angle="60"
+			Center="24, 29"
+			ChainLabel="57"
+			HaveMustache="True"
+			height="2"
+			id="164"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="140"
+					feature="OVERSIZED"
+					num="0" />
+				<Neighbour
+					id="168"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="166"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="167">
+		<Path
+			Angle="0"
+			Center="29, 29"
+			ChainLabel="9П"
+			HaveMustache="False"
+			height="2"
+			id="166"
+			isElementInRightPart="True"
+			real_length="500"
+			width="6">
+			<Neighbours>
+				<Neighbour
+					id="164"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="170"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="780, 753,4421"
+					master_chain="167"
+					master_abstract_chain="166"
+					props="72"
+					semDir="LEFT"
+					semLabel="Ч9"
+					semType="PATH"
+					id="316"
+					num="0" />
+				<Signal
+					Center="960, 753,4421"
+					master_chain="167"
+					master_abstract_chain="166"
+					props="72"
+					semDir="RIGHT"
+					semLabel="Н9"
+					semType="PATH"
+					id="317"
+					num="1" />
+			</Signals>
+		</Path>
+	</Chain>
+	<Chain
+		id="169">
+		<Path
+			Angle="0"
+			Center="30, 31"
+			ChainLabel="11П"
+			HaveMustache="False"
+			height="2"
+			id="168"
+			isElementInRightPart="True"
+			real_length="500"
+			width="8">
+			<Neighbours>
+				<Neighbour
+					id="164"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="172"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="780, 805,4036"
+					master_chain="169"
+					master_abstract_chain="168"
+					props="72"
+					semDir="LEFT"
+					semLabel="Ч11"
+					semType="PATH"
+					id="318"
+					num="0" />
+				<Signal
+					Center="1020, 805,4036"
+					master_chain="169"
+					master_abstract_chain="168"
+					props="72"
+					semDir="RIGHT"
+					semLabel="Н11"
+					semType="PATH"
+					id="319"
+					num="1" />
+			</Signals>
+		</Path>
+	</Chain>
+	<Chain
+		id="171">
+		<Commutator
+			Angle="180"
+			Center="33, 29"
+			ChainLabel="69"
+			HaveMustache="True"
+			height="2"
+			id="170"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="172"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="166"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="162"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="173">
+		<Commutator
+			Angle="180"
+			Center="36, 29"
+			ChainLabel="73"
+			HaveMustache="True"
+			height="2"
+			id="172"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="174"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="170"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="168"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="175">
+		<Commutator
+			Angle="0"
+			Center="38, 29"
+			ChainLabel="77"
+			HaveMustache="True"
+			height="2"
+			id="174"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="172"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="291"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="154"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="179">
+		<Commutator
+			Angle="180"
+			Center="48, 5"
+			ChainLabel="60"
+			HaveMustache="True"
+			height="2"
+			id="178"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="180"
+					feature="OVERSIZED"
+					num="0" />
+				<Neighbour
+					id="76"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="78"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="181">
+		<Commutator
+			Angle="240"
+			Center="51, 9"
+			ChainLabel="54"
+			HaveMustache="True"
+			height="2"
+			id="180"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="182"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="178"
+					feature="OVERSIZED"
+					num="1" />
+				<Neighbour
+					id="80"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="183">
+		<Commutator
+			Angle="180"
+			Center="52, 11"
+			ChainLabel="48"
+			HaveMustache="True"
+			height="2"
+			id="182"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="184"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="82"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="180"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="185">
+		<Commutator
+			Angle="0"
+			Center="55, 11"
+			ChainLabel="40"
+			HaveMustache="True"
+			height="2"
+			id="184"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="182"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="186"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="205"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="189">
+		<Commutator
+			Angle="0"
+			Center="60, 11"
+			ChainLabel="28"
+			HaveMustache="True"
+			height="2"
+			id="188"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="186"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="190"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="209"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="191">
+		<PathPart
+			Angle="0"
+			Center="64, 11"
+			ChainLabel="16ПП"
+			HaveMustache="True"
+			height="2"
+			id="190"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="188"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="193"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="1860, 285,7883"
+					master_chain="191"
+					master_abstract_chain="190"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М28"
+					semType="MANEUVER"
+					id="353"
+					num="0" />
+				<Signal
+					Center="1995, 285,7883"
+					master_chain="191"
+					master_abstract_chain="190"
+					props="undersized"
+					semDir="RIGHT"
+					semLabel="М4"
+					semType="MANEUVER"
+					id="354"
+					num="1" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="192">
+		<Commutator
+			Angle="180"
+			Center="52, 1"
+			ChainLabel="50"
+			HaveMustache="True"
+			height="2"
+			id="176"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="186"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="70"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="72"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+		<Commutator
+			Angle="180"
+			Center="58, 11"
+			ChainLabel="34"
+			HaveMustache="True"
+			height="2"
+			id="186"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="188"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="184"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="176"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="194">
+		<Commutator
+			Angle="180"
+			Center="69, 11"
+			ChainLabel="4"
+			HaveMustache="True"
+			height="2"
+			id="193"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="195"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="190"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="213"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="196">
+		<PathPart
+			Angle="0"
+			Center="76, 8"
+			ChainLabel="17ПП"
+			HaveMustache="True"
+			height="2"
+			id="195"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="193"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="197"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="2175, 246,8172"
+					master_chain="196"
+					master_abstract_chain="195"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М30"
+					semType="MANEUVER"
+					id="355"
+					num="0" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="198">
+		<Approximation
+			Angle="0"
+			Center="78, 8"
+			ChainLabel="17П_УП"
+			HaveMustache="False"
+			height="2"
+			id="197"
+			isElementInRightPart="True"
+			real_length="1000"
+			width="2"
+			direction="LEFT"
+			have_uksps="True">
+			<Neighbours>
+				<Neighbour
+					id="195"
+					feature="NONE"
+					num="0" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="2310, 207,8461"
+					master_chain="198"
+					master_abstract_chain="197"
+					props="40"
+					semDir="LEFT"
+					semLabel="17П"
+					semType="PATH"
+					id="320"
+					num="0" />
+			</Signals>
+		</Approximation>
+	</Chain>
+	<Chain
+		id="204">
+		<Path
+			Angle="0"
+			Center="44, 13"
+			ChainLabel="12П"
+			HaveMustache="False"
+			height="2"
+			id="203"
+			isElementInRightPart="True"
+			real_length="500"
+			width="22">
+			<Neighbours>
+				<Neighbour
+					id="92"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="205"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="990, 337,7498"
+					master_chain="204"
+					master_abstract_chain="203"
+					props="72"
+					semDir="LEFT"
+					semLabel="Ч12"
+					semType="PATH"
+					id="321"
+					num="0" />
+				<Signal
+					Center="1650, 337,7498"
+					master_chain="204"
+					master_abstract_chain="203"
+					props="72"
+					semDir="RIGHT"
+					semLabel="Н12"
+					semType="PATH"
+					id="322"
+					num="1" />
+			</Signals>
+		</Path>
+	</Chain>
+	<Chain
+		id="206">
+		<Commutator
+			Angle="180"
+			Center="56, 13"
+			ChainLabel="38"
+			HaveMustache="True"
+			height="2"
+			id="205"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="207"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="203"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="184"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="208">
+		<Commutator
+			Angle="0"
+			Center="58, 13"
+			ChainLabel="36"
+			HaveMustache="True"
+			height="2"
+			id="207"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="205"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="209"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="227"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="210">
+		<Commutator
+			Angle="180"
+			Center="61, 13"
+			ChainLabel="24"
+			HaveMustache="True"
+			height="2"
+			id="209"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="211"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="207"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="188"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="212">
+		<Commutator
+			Angle="180"
+			Center="66, 13"
+			ChainLabel="14"
+			HaveMustache="True"
+			height="2"
+			id="211"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="213"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="209"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="233"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="214">
+		<Commutator
+			Angle="0"
+			Center="68, 13"
+			ChainLabel="8"
+			HaveMustache="True"
+			height="2"
+			id="213"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="211"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="215"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="193"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="216">
+		<Commutator
+			Angle="0"
+			Center="72, 13"
+			ChainLabel="2"
+			HaveMustache="True"
+			height="2"
+			id="215"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="213"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="221"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="217"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="218">
+		<PathPart
+			Angle="0"
+			Center="76, 10"
+			ChainLabel="20ПП"
+			HaveMustache="True"
+			height="2"
+			id="217"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="215"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="219"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="2212,5, 285,7884"
+					master_chain="218"
+					master_abstract_chain="217"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М2"
+					semType="MANEUVER"
+					id="356"
+					num="0" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="220">
+		<Approximation
+			Angle="0"
+			Center="78, 10"
+			ChainLabel="20П_УП"
+			HaveMustache="False"
+			height="2"
+			id="219"
+			isElementInRightPart="True"
+			real_length="1000"
+			width="2"
+			direction="LEFT"
+			have_uksps="True">
+			<Neighbours>
+				<Neighbour
+					id="217"
+					feature="NONE"
+					num="0" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="2310, 259,8076"
+					master_chain="220"
+					master_abstract_chain="219"
+					props="40"
+					semDir="LEFT"
+					semLabel="20П"
+					semType="PATH"
+					id="323"
+					num="0" />
+			</Signals>
+		</Approximation>
+	</Chain>
+	<Chain
+		id="222">
+		<PathPart
+			Angle="0"
+			Center="75, 13"
+			ChainLabel="21ПП"
+			HaveMustache="True"
+			height="2"
+			id="221"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="215"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="223"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="2205, 337,7499"
+					master_chain="222"
+					master_abstract_chain="221"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М32"
+					semType="MANEUVER"
+					id="357"
+					num="0" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="224">
+		<Approximation
+			Angle="0"
+			Center="78, 13"
+			ChainLabel="21П_УП"
+			HaveMustache="False"
+			height="2"
+			id="223"
+			isElementInRightPart="True"
+			real_length="1000"
+			width="2"
+			direction="LEFT"
+			have_uksps="True">
+			<Neighbours>
+				<Neighbour
+					id="221"
+					feature="NONE"
+					num="0" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="2310, 337,7498"
+					master_chain="224"
+					master_abstract_chain="223"
+					props="40"
+					semDir="LEFT"
+					semLabel="21П"
+					semType="PATH"
+					id="324"
+					num="0" />
+			</Signals>
+		</Approximation>
+	</Chain>
+	<Chain
+		id="226">
+		<Path
+			Angle="0"
+			Center="45, 15"
+			ChainLabel="14П"
+			HaveMustache="False"
+			height="2"
+			id="225"
+			isElementInRightPart="True"
+			real_length="500"
+			width="26">
+			<Neighbours>
+				<Neighbour
+					id="94"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="227"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="960, 389,7114"
+					master_chain="226"
+					master_abstract_chain="225"
+					props="72"
+					semDir="LEFT"
+					semLabel="Ч14"
+					semType="PATH"
+					id="325"
+					num="0" />
+				<Signal
+					Center="1740, 389,7114"
+					master_chain="226"
+					master_abstract_chain="225"
+					props="72"
+					semDir="RIGHT"
+					semLabel="Н14"
+					semType="PATH"
+					id="326"
+					num="1" />
+			</Signals>
+		</Path>
+	</Chain>
+	<Chain
+		id="228">
+		<Commutator
+			Angle="180"
+			Center="59, 15"
+			ChainLabel="32"
+			HaveMustache="True"
+			height="2"
+			id="227"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="229"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="225"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="207"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="230">
+		<Commutator
+			Angle="180"
+			Center="61, 15"
+			ChainLabel="26"
+			HaveMustache="True"
+			height="2"
+			id="229"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="231"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="227"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="243"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="232">
+		<Commutator
+			Angle="0"
+			Center="63, 15"
+			ChainLabel="22"
+			HaveMustache="True"
+			height="2"
+			id="231"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="229"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="233"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="245"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="234">
+		<Commutator
+			Angle="0"
+			Center="65, 15"
+			ChainLabel="18"
+			HaveMustache="True"
+			height="2"
+			id="233"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="231"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="235"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="211"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="236">
+		<PathPart
+			Angle="0"
+			Center="75, 15"
+			ChainLabel="22ПП"
+			HaveMustache="True"
+			height="2"
+			id="235"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="233"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="237"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="2100, 389,7114"
+					master_chain="236"
+					master_abstract_chain="235"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М18"
+					semType="MANEUVER"
+					id="358"
+					num="0" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="238">
+		<Approximation
+			Angle="0"
+			Center="78, 15"
+			ChainLabel="22П_УП"
+			HaveMustache="False"
+			height="2"
+			id="237"
+			isElementInRightPart="True"
+			real_length="1000"
+			width="2"
+			direction="LEFT"
+			have_uksps="True">
+			<Neighbours>
+				<Neighbour
+					id="235"
+					feature="NONE"
+					num="0" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="2310, 389,7114"
+					master_chain="238"
+					master_abstract_chain="237"
+					props="40"
+					semDir="LEFT"
+					semLabel="22П"
+					semType="PATH"
+					id="327"
+					num="0" />
+			</Signals>
+		</Approximation>
+	</Chain>
+	<Chain
+		id="240">
+		<Path
+			Angle="0"
+			Center="44, 17"
+			ChainLabel="16П"
+			HaveMustache="False"
+			height="2"
+			id="239"
+			isElementInRightPart="True"
+			real_length="500"
+			width="20">
+			<Neighbours>
+				<Neighbour
+					id="118"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="241"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="1020, 441,6729"
+					master_chain="240"
+					master_abstract_chain="239"
+					props="72"
+					semDir="LEFT"
+					semLabel="Ч16"
+					semType="PATH"
+					id="328"
+					num="0" />
+				<Signal
+					Center="1620, 441,6729"
+					master_chain="240"
+					master_abstract_chain="239"
+					props="72"
+					semDir="RIGHT"
+					semLabel="Н16"
+					semType="PATH"
+					id="329"
+					num="1" />
+			</Signals>
+		</Path>
+	</Chain>
+	<Chain
+		id="242">
+		<Commutator
+			Angle="180"
+			Center="55, 17"
+			ChainLabel="42"
+			HaveMustache="True"
+			height="2"
+			id="241"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="243"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="239"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="257"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="244">
+		<Commutator
+			Angle="0"
+			Center="60, 17"
+			ChainLabel="30"
+			HaveMustache="True"
+			height="2"
+			id="243"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="241"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="245"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="229"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="246">
+		<Commutator
+			Angle="180"
+			Center="64, 17"
+			ChainLabel="20"
+			HaveMustache="True"
+			height="2"
+			id="245"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="247"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="243"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="231"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="248">
+		<Commutator
+			Angle="0"
+			Center="66, 17"
+			ChainLabel="16"
+			HaveMustache="True"
+			height="2"
+			id="247"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="245"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="249"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="261"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="250">
+		<PathPart
+			Angle="0"
+			Center="72, 17"
+			ChainLabel="23ПП"
+			HaveMustache="True"
+			height="2"
+			id="249"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="247"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="251"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="2070, 441,6729"
+					master_chain="250"
+					master_abstract_chain="249"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М16"
+					semType="MANEUVER"
+					id="359"
+					num="0" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="252">
+		<Approximation
+			Angle="0"
+			Center="78, 17"
+			ChainLabel="23П_УП"
+			HaveMustache="False"
+			height="2"
+			id="251"
+			isElementInRightPart="True"
+			real_length="1000"
+			width="2"
+			direction="LEFT"
+			have_uksps="True">
+			<Neighbours>
+				<Neighbour
+					id="249"
+					feature="NONE"
+					num="0" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="2310, 441,6729"
+					master_chain="252"
+					master_abstract_chain="251"
+					props="40"
+					semDir="LEFT"
+					semLabel="23П"
+					semType="PATH"
+					id="330"
+					num="0" />
+			</Signals>
+		</Approximation>
+	</Chain>
+	<Chain
+		id="254">
+		<PathPart
+			Angle="0"
+			Center="43, 19"
+			ChainLabel="24ПП"
+			HaveMustache="True"
+			height="2"
+			id="253"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="150"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="255"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="1245, 493,6345"
+					master_chain="254"
+					master_abstract_chain="253"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М83"
+					semType="MANEUVER"
+					id="360"
+					num="0" />
+				<Signal
+					Center="1425, 493,6345"
+					master_chain="254"
+					master_abstract_chain="253"
+					props="undersized"
+					semDir="RIGHT"
+					semLabel="М52"
+					semType="MANEUVER"
+					id="361"
+					num="1" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="256">
+		<Commutator
+			Angle="180"
+			Center="52, 19"
+			ChainLabel="52"
+			HaveMustache="True"
+			height="2"
+			id="255"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="257"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="253"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="273"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="258">
+		<Commutator
+			Angle="0"
+			Center="54, 19"
+			ChainLabel="44"
+			HaveMustache="True"
+			height="2"
+			id="257"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="255"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="259"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="241"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="260">
+		<PathPart
+			Angle="0"
+			Center="61, 19"
+			ChainLabel="25ПП"
+			HaveMustache="True"
+			height="2"
+			id="259"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="257"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="261"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="1725, 493,6345"
+					master_chain="260"
+					master_abstract_chain="259"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М44"
+					semType="MANEUVER"
+					id="362"
+					num="0" />
+				<Signal
+					Center="1920, 493,6345"
+					master_chain="260"
+					master_abstract_chain="259"
+					props="undersized"
+					semDir="RIGHT"
+					semLabel="М12"
+					semType="MANEUVER"
+					id="363"
+					num="1" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="262">
+		<Commutator
+			Angle="180"
+			Center="67, 19"
+			ChainLabel="12"
+			HaveMustache="True"
+			height="2"
+			id="261"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="263"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="259"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="247"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="264">
+		<Commutator
+			Angle="180"
+			Center="69, 19"
+			ChainLabel="6"
+			HaveMustache="True"
+			height="2"
+			id="263"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="265"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="261"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="282"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="266">
+		<PathPart
+			Angle="0"
+			Center="75, 19"
+			ChainLabel="26ПП"
+			HaveMustache="True"
+			height="2"
+			id="265"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="263"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="267"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="2160, 493,6344"
+					master_chain="266"
+					master_abstract_chain="265"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М6"
+					semType="MANEUVER"
+					id="364"
+					num="0" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="268">
+		<Approximation
+			Angle="0"
+			Center="78, 19"
+			ChainLabel="26П_УП"
+			HaveMustache="False"
+			height="2"
+			id="267"
+			isElementInRightPart="True"
+			real_length="1000"
+			width="2"
+			direction="LEFT"
+			have_uksps="True">
+			<Neighbours>
+				<Neighbour
+					id="265"
+					feature="NONE"
+					num="0" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="2310, 493,6344"
+					master_chain="268"
+					master_abstract_chain="267"
+					props="40"
+					semDir="LEFT"
+					semLabel="26П"
+					semType="PATH"
+					id="331"
+					num="0" />
+			</Signals>
+		</Approximation>
+	</Chain>
+	<Chain
+		id="276">
+		<PathPart
+			Angle="0"
+			Center="44, 21"
+			ChainLabel="27ПП"
+			HaveMustache="True"
+			height="2"
+			id="275"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="154"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="271"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="1290, 545,5959"
+					master_chain="276"
+					master_abstract_chain="275"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М54"
+					semType="MANEUVER"
+					id="365"
+					num="0" />
+				<Signal
+					Center="1395, 545,5959"
+					master_chain="276"
+					master_abstract_chain="275"
+					props="undersized"
+					semDir="RIGHT"
+					semLabel="М56"
+					semType="MANEUVER"
+					id="366"
+					num="1" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="278">
+		<Commutator
+			Angle="0"
+			Center="53, 21"
+			ChainLabel="46"
+			HaveMustache="True"
+			height="2"
+			id="277"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="RIGHT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="273"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="280"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="286"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="281">
+		<PathPart
+			Angle="0"
+			Center="61, 21"
+			ChainLabel="28ПП"
+			HaveMustache="True"
+			height="2"
+			id="280"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="277"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="282"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="1710, 545,5959"
+					master_chain="281"
+					master_abstract_chain="280"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М46"
+					semType="MANEUVER"
+					id="367"
+					num="0" />
+				<Signal
+					Center="1935, 545,5959"
+					master_chain="281"
+					master_abstract_chain="280"
+					props="undersized"
+					semDir="RIGHT"
+					semLabel="М10"
+					semType="MANEUVER"
+					id="368"
+					num="1" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="283">
+		<Commutator
+			Angle="0"
+			Center="68, 21"
+			ChainLabel="10"
+			HaveMustache="True"
+			height="2"
+			id="282"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="280"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="284"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="263"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+	<Chain
+		id="285">
+		<DeadEnd
+			Angle="0"
+			Center="71, 21"
+			ChainLabel="М5П"
+			HaveMustache="False"
+			height="2"
+			id="284"
+			isElementInRightPart="True"
+			real_length="300"
+			width="4"
+			isDeadEnd="False">
+			<Neighbours>
+				<Neighbour
+					id="282"
+					feature="NONE"
+					num="0" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="2070, 545,5959"
+					master_chain="285"
+					master_abstract_chain="284"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М58"
+					semType="MANEUVER"
+					id="369"
+					num="0" />
+			</Signals>
+		</DeadEnd>
+	</Chain>
+	<Chain
+		id="287">
+		<DeadEnd
+			Angle="0"
+			Center="69, 23"
+			ChainLabel="М6П"
+			HaveMustache="False"
+			height="2"
+			id="286"
+			isElementInRightPart="True"
+			real_length="300"
+			width="4"
+			isDeadEnd="False">
+			<Neighbours>
+				<Neighbour
+					id="277"
+					feature="NONE"
+					num="0" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="2010, 597,5575"
+					master_chain="287"
+					master_abstract_chain="286"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М60"
+					semType="MANEUVER"
+					id="370"
+					num="0" />
+			</Signals>
+		</DeadEnd>
+	</Chain>
+	<Chain
+		id="374">
+		<PathPart
+			Angle="0"
+			Center="44, 29"
+			ChainLabel="29ПП"
+			HaveMustache="True"
+			height="2"
+			id="291"
+			isElementInRightPart="True"
+			real_length="300"
+			width="2">
+			<Neighbours>
+				<Neighbour
+					id="174"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="271"
+					feature="NONE"
+					num="1" />
+			</Neighbours>
+			<Signals>
+				<Signal
+					Center="1230, 753,4421"
+					master_chain="374"
+					master_abstract_chain="291"
+					props="undersized"
+					semDir="LEFT"
+					semLabel="М79"
+					semType="MANEUVER"
+					id="371"
+					num="0" />
+			</Signals>
+		</PathPart>
+	</Chain>
+	<Chain
+		id="376">
+		<Commutator
+			Angle="0"
+			Center="51, 21"
+			ChainLabel="56"
+			HaveMustache="True"
+			height="2"
+			id="273"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="271"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="277"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="255"
+					feature="TWIN"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+		<Commutator
+			Angle="180"
+			Center="49, 21"
+			ChainLabel="58"
+			HaveMustache="True"
+			height="2"
+			id="271"
+			isElementInRightPart="True"
+			real_length="200"
+			width="2"
+			Position="PLUS"
+			Autoreset="False"
+			Autoreset_default="PLUS"
+			Autoreset_time="0"
+			CommutatorType="LEFT"
+			Specify="COMMON_COMM"
+			UnlockDelay="0">
+			<Neighbours>
+				<Neighbour
+					id="273"
+					feature="NONE"
+					num="0" />
+				<Neighbour
+					id="275"
+					feature="NONE"
+					num="1" />
+				<Neighbour
+					id="291"
+					feature="NONE"
+					num="2" />
+			</Neighbours>
+			<Signals />
+		</Commutator>
+	</Chain>
+</Station>

@@ -277,6 +277,31 @@ void Scene::openFile(QFile &file)
 
 }
 
+void Scene::generateStation(QFile &fStation, QFile &fBMRC)
+{
+    qDebug()<<"save";
+
+
+    QXmlStreamWriter writer(&fBMRC);
+
+    writer.setAutoFormatting(true);
+    writer.writeStartDocument("1.0");
+
+
+
+    writer.writeStartElement("Station");
+    writer.writeAttribute("STEP_GRID", QString::number(MainElement::GetStepGrid()));
+    writer.writeAttribute("RadContact", QString::number(MainElement::getRad()));
+    writer.writeAttribute("widthLinesElements", QString::number(MainElement::getWidthLinesElements()));
+    writer.writeAttribute("widthLinesContacts", QString::number(MainElement::getWidthLinesContacts()));
+
+
+
+    writer.writeEndElement();//Station
+    writer.writeEndDocument();
+
+}
+
 void Scene::setStationParametrs(QXmlStreamAttributes &attrib)
 {
     if(attrib.hasAttribute("STEP_GRID"))

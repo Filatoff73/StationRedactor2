@@ -74,6 +74,8 @@ public:
     void setArrElement(const QVector<MainElement *> &value);
 
     void openFile(QFile &f);
+
+    void generateStation(QFile &fStation, QFile &fBMRC);
     //Открытие параметров станции из файла
     void setStationParametrs(QXmlStreamAttributes &attrib);
     //Создание елементов из файла, ввод начальных параметров с первого прохода

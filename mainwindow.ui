@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>420</height>
+    <height>578</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -157,7 +157,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -167,6 +167,7 @@
     <addaction name="Open"/>
     <addaction name="Save"/>
     <addaction name="Save_as"/>
+    <addaction name="action"/>
     <addaction name="separator"/>
     <addaction name="Exit"/>
    </widget>
@@ -202,6 +203,11 @@
   <action name="Help">
    <property name="text">
     <string>О программе</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>Сгенерировать БМРЦ станции</string>
    </property>
   </action>
  </widget>
