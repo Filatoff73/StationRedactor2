@@ -30,6 +30,7 @@ MainElement* MainElement::relayContactSelected=NULL;
  const int MainElement::TYPE_CHAIN_BUTTON=5;
  const int MainElement::TYPE_RELAY_SECOND=6;
  const int MainElement::TYPE_BLOCK_RELAY =7;
+  const int MainElement::TYPE_BLOCK_NSO =18;
 
 
 
@@ -50,6 +51,7 @@ MainElement::MainElement(QGraphicsObject* parent) : QGraphicsObject(parent)
     isSelectRelayMode=false;
     relayContactSelected=NULL;
 
+    labelElement = "";
 
 }
 
@@ -77,6 +79,8 @@ MainElement::MainElement(int idElement, int posX, int posY, bool isMirrorGorizon
     isSelectRelayMode=false;
     relayContactSelected=NULL;
     nContacts = nContactsDown + nContactsUp + nContactsLeft + nContactsRight;
+
+    labelElement = "";
 }
 
 
@@ -283,6 +287,7 @@ void MainElement::SaveBaseElementParametrs(QXmlStreamWriter &writer)
     writer.writeAttribute("nContactsRight", QString::number(nContactsRight));
     writer.writeAttribute("nContactsUp", QString::number(nContactsUp));
     writer.writeAttribute("name", nameElement);
+    writer.writeAttribute("label", labelElement);
 }
 
 Contacts *MainElement::findContactByNum(int num)
@@ -293,6 +298,11 @@ Contacts *MainElement::findContactByNum(int num)
             return arrContacts[i];
     }
     return NULL;
+}
+
+void MainElement::WriteNeigboursToFileStation(QTextStream &out)
+{
+     out << "//////////////////////"<<endl;
 }
 
 int MainElement::getTYPE_RELAY_RELAY()
@@ -362,6 +372,31 @@ void MainElement::RemoveAssociatedRelay()
 {
     return;
 }
+QString MainElement::getLabelElement() const
+{
+    return labelElement;
+}
+
+void MainElement::setLabelElement(const QString &value)
+{
+    labelElement = value;
+}
+int MainElement::getTypeElement() const
+{
+    return typeElement;
+}
+
+void MainElement::setTypeElement(int value)
+{
+    typeElement = value;
+}
+int MainElement::getTYPE_BLOCK_NSO()
+{
+    return TYPE_BLOCK_NSO;
+}
+
+
+
 
 
 QRectF MainElement::boundingRect() const

@@ -9,6 +9,7 @@
 #include <QVector>
 #include <QGraphicsLineItem>
 #include <QDialog>
+#include <generatorbmrc.h>
 
 
 class Scene : public QGraphicsScene
@@ -75,6 +76,10 @@ public:
 
     void openFile(QFile &f);
 
+    //Сгенерировать соседей в cpp код
+    void generateStationCode(QFile &f);
+
+    //Сгенерировать бмрц станции по xml файлу станции
     void generateStation(QFile &fStation, QFile &fBMRC);
     //Открытие параметров станции из файла
     void setStationParametrs(QXmlStreamAttributes &attrib);
@@ -99,6 +104,7 @@ private:
 
 
     QVector <MainElement*> arrElement;
+    int idElement;
 
 };
 

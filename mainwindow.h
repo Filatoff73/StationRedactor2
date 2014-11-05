@@ -21,6 +21,7 @@ public:
     void saveAs();
     void open();
     void openStation();
+    void generateStationCode();
 
 private:
     Ui::MainWindow *ui;
@@ -43,6 +44,7 @@ private slots:
     //void SiezeBlocks();
     void RadContacts();
     void GreedButton();
+
 
     void MenuBarFunc(QAction *act);
 

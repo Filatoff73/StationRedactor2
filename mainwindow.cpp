@@ -122,6 +122,7 @@ void MainWindow::GreedButton()
 }
 
 
+
 void MainWindow::save()
 {
     if(!saveDir.compare(""))
@@ -232,6 +233,29 @@ void MainWindow::openStation()
 
 }
 
+void MainWindow::generateStationCode()
+{
+    QString fileName = QFileDialog::getSaveFileName(this,
+             tr("Сгенерировать код станции"), saveDir, "*.txt");
+
+    if(!fileName.compare(""))
+        return;
+
+
+    if(fileName.mid(fileName.size() - 8).compare(".txt"))
+        fileName += ".txt";
+
+    QDir dir(fileName);
+    saveDir = dir.absolutePath();
+
+    QFile f(saveDir);
+    if(!f.open(QIODevice::WriteOnly | QIODevice::Text))
+        return;
+
+    scene->generateStationCode(f);
+    f.close();
+}
+
 
 
 
@@ -245,6 +269,11 @@ void MainWindow::MenuBarFunc(QAction *act)
         if(!txt.compare("Открыть"))
         {
             open();
+        }
+
+        if(!txt.compare("Сгенерировать код станции"))
+        {
+            generateStationCode();
         }
 
         if(!txt.compare("Сохранить"))

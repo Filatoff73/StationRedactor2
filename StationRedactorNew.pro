@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     relayrelay.cpp \
     relaycontact.cpp \
     chainbutton.cpp \
-    relaysecond.cpp
+    relaysecond.cpp \
+    generatorbmrc.cpp
 
 HEADERS  += mainwindow.h \
     scene.h \
@@ -37,6 +38,7 @@ HEADERS  += mainwindow.h \
     relayrelay.h \
     relaycontact.h \
     chainbutton.h \
-    relaysecond.h
+    relaysecond.h \
+    generatorbmrc.h
 
 FORMS    += mainwindow.ui

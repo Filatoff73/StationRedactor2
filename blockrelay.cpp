@@ -149,6 +149,7 @@ void BlockRelay::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 {
 
     painter->drawText(sizeX/2.0*STEP_GRID - nameElement.length()*sizeX/2.0, sizeY/2.0*STEP_GRID, nameElement);
+    painter->drawText(sizeX/2.0*STEP_GRID - labelElement.length()*sizeX/2.0, sizeY/1.5*STEP_GRID, labelElement);
     MainElement::paint(painter, option, widget);
 
 

@@ -96,6 +96,8 @@ public:
 
     Contacts* findContactByNum(int num);
 
+    void WriteNeigboursToFileStation(QTextStream& out);
+
 
     static int getTYPE_RELAY_RELAY();
 
@@ -127,6 +129,14 @@ public:
 
 
 
+    QString getLabelElement() const;
+    void setLabelElement(const QString &value);
+
+    int getTypeElement() const;
+    void setTypeElement(int value);
+
+    static int getTYPE_BLOCK_NSO();
+
 protected:
     static int STEP_GRID;
     static int rad;
@@ -146,6 +156,7 @@ protected:
     bool isMirrorVertical;
 
     QString nameElement;
+    QString labelElement;
     int idElement;
     int typeElement;
 
@@ -165,6 +176,7 @@ protected:
     static const int TYPE_CHAIN_BUTTON ;
     static const int TYPE_RELAY_SECOND ;
     static const int TYPE_BLOCK_RELAY ;
+    static const int TYPE_BLOCK_NSO ;
 
 
 

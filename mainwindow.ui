@@ -168,6 +168,7 @@
     <addaction name="Save"/>
     <addaction name="Save_as"/>
     <addaction name="action"/>
+    <addaction name="action_3"/>
     <addaction name="separator"/>
     <addaction name="Exit"/>
    </widget>
@@ -208,6 +209,11 @@
   <action name="action">
    <property name="text">
     <string>Сгенерировать БМРЦ станции</string>
+   </property>
+  </action>
+  <action name="action_3">
+   <property name="text">
+    <string>Сгенерировать код станции</string>
    </property>
   </action>
  </widget>

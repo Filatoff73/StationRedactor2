@@ -13,8 +13,8 @@
 #include <QTextEdit>
 #include <QHBoxLayout>
 #include <QMessageBox>
-int Scene::scene_width=15000;
-int Scene::scene_height=15000;
+int Scene::scene_width=40000;
+int Scene::scene_height=40000;
 
 Scene::Scene(QObject* parent): QGraphicsScene(parent)
 {
@@ -26,6 +26,7 @@ Scene::Scene(QObject* parent): QGraphicsScene(parent)
     beginContact=NULL;
     endContact=NULL;
     question = new QDialog;
+    idElement=0;
 
 }
 
@@ -277,28 +278,58 @@ void Scene::openFile(QFile &file)
 
 }
 
+void Scene::generateStationCode(QFile &f)
+{
+    qDebug()<<"generate";
+
+    QTextStream out(&f);
+
+    out << "void initNeighbours() \n{" << endl;
+
+    out << "nBlocks = "<<arrElement.size() << ";" << endl;
+
+    out << "arrBlocks = new AbstractBlock*[nBlocks];" << endl;
+
+    for(int i=0;i<arrElement.size();i++)
+    {
+        if(arrElement[i]->getTypeElement()==MainElement::getTYPE_BLOCK_NSO())
+            {
+
+                out << "arrBlocks["<< i << "] = new Block_NSO;" << endl;
+                out << "arrBlocks["<< i << "]->setIdBlock(" << arrElement[i]->getIdElement() << ");" << endl;
+
+            }
+
+    }
+
+    for(int i=0;i<arrElement.size();i++)
+    {
+        if(arrElement[i]->getTypeElement()==MainElement::getTYPE_BLOCK_NSO())
+            {
+                arrElement[i]->WriteNeigboursToFileStation(out);
+            }
+
+    }
+
+
+
+    out << "}" << endl;
+
+
+
+}
+
 void Scene::generateStation(QFile &fStation, QFile &fBMRC)
 {
     qDebug()<<"save";
 
 
     QXmlStreamWriter writer(&fBMRC);
+    QXmlStreamReader reader(fStation.readAll());
 
-    writer.setAutoFormatting(true);
-    writer.writeStartDocument("1.0");
-
-
-
-    writer.writeStartElement("Station");
-    writer.writeAttribute("STEP_GRID", QString::number(MainElement::GetStepGrid()));
-    writer.writeAttribute("RadContact", QString::number(MainElement::getRad()));
-    writer.writeAttribute("widthLinesElements", QString::number(MainElement::getWidthLinesElements()));
-    writer.writeAttribute("widthLinesContacts", QString::number(MainElement::getWidthLinesContacts()));
-
-
-
-    writer.writeEndElement();//Station
-    writer.writeEndDocument();
+    GeneratorBMRC* generator = new GeneratorBMRC(&reader, &writer);
+    generator->Generate();
+    delete generator;
 
 }
 
@@ -328,7 +359,7 @@ void Scene::setElementParametrs(QXmlStreamAttributes &attrib)
 {
     int typeElement=0, idElement=0, posX=0, posY=0, sizeX=0, sizeY=0, nContactsLeft=0, nContactsDown=0, nContactsRight=0, nContactsUp=0;
     bool isMirrorGorizontal=false, isMirrorVertical=false;
-    QString name="";
+    QString name="", label="";
 
     if(attrib.hasAttribute("typeElement"))
     {
@@ -402,6 +433,11 @@ void Scene::setElementParametrs(QXmlStreamAttributes &attrib)
         name = attrib.value("name").toString();
     }
 
+    if(attrib.hasAttribute("label"))
+    {
+        label = attrib.value("label").toString();
+    }
+
     if(typeElement == MainElement::getTYPE_CHAIN_POLUS())
     {
         arrElement.append(new ChainPolus(idElement, posX, posY, isMirrorGorizontal, isMirrorVertical, sizeX, sizeY, nContactsLeft, nContactsDown, nContactsRight, nContactsUp,name));
@@ -449,6 +485,9 @@ void Scene::setElementParametrs(QXmlStreamAttributes &attrib)
         arrElement.last()->setVisible(true);
         this->addItem(arrElement.last());
     }
+
+        arrElement.last()->setLabelElement(label);
+
 
 
 }
@@ -605,6 +644,18 @@ void Scene::firstReading(QFile &file)
 
     reader.clear();
     this->update();
+
+    int maxId=arrElement[0]->getIdElement();
+    for(int i=0;i<arrElement.size();i++)
+    {
+        if(arrElement[i]->getIdElement() > maxId)
+            maxId = arrElement[i]->getIdElement();
+    }
+
+    idElement = maxId + 1;
+
+
+
 }
 
 void Scene::secondReading(QFile &file)
@@ -657,11 +708,6 @@ void Scene::secondReading(QFile &file)
 void Scene::saveFile(QFile &file)
 {
     qDebug()<<"save";
-
-    for(int i=0;i<arrElement.size();i++)
-    {
-        arrElement[i]->setIdElement(i);
-    }
 
     QXmlStreamWriter writer(&file);
 
@@ -1033,6 +1079,8 @@ void Scene::AddTestBlock(QPoint pos)
 {
     arrElement.append(new BlockRelay());
     arrElement.last()->setVisible(true);
+    arrElement.last()->setIdElement(idElement);
+    idElement++;
     this->addItem(arrElement.last());
     int gridSize = MainElement::GetStepGrid();
     qreal xV = round(pos.x()/gridSize)*gridSize;
@@ -1117,6 +1165,9 @@ void Scene::AddFileBlock(QPoint pos)
 
                 arrElement.append(new BlockRelay(0,type,0,0,false,false,sizeX,sizeY, nContactsLeft, nContactsDown, ncOntactsRight, nContactsUp, name));
                 arrElement.last()->setVisible(true);
+                arrElement.last()->setIdElement(idElement);
+                idElement++;
+
                 this->addItem(arrElement.last());
                 int gridSize = MainElement::GetStepGrid();
                 qreal xV = round(pos.x()/gridSize)*gridSize;
@@ -1195,6 +1246,9 @@ void Scene::AddPoint(QPoint pos)
 {
     arrElement.append(new ChainPoint());
     arrElement.last()->setVisible(true);
+    arrElement.last()->setIdElement(idElement);
+    idElement++;
+
     this->addItem(arrElement.last());
 
     int gridSize = MainElement::GetStepGrid();
@@ -1229,6 +1283,9 @@ void Scene::AddChainButton(QPoint pos)
 {
     arrElement.append(new ChainButton());
     arrElement.last()->setVisible(true);
+    arrElement.last()->setIdElement(idElement);
+    idElement++;
+
     this->addItem(arrElement.last());
 
     int gridSize = MainElement::GetStepGrid();
@@ -1262,6 +1319,9 @@ void Scene::AddSecondContactRelay(QPoint pos)
 {
     arrElement.append(new RelaySecond());
     arrElement.last()->setVisible(true);
+    arrElement.last()->setIdElement(idElement);
+    idElement++;
+
     this->addItem(arrElement.last());
     int gridSize = MainElement::GetStepGrid();
     qreal xV = round(pos.x()/gridSize)*gridSize;
@@ -1296,6 +1356,9 @@ void Scene::AddPolus(QPoint pos)
 {
     arrElement.append(new ChainPolus());
     arrElement.last()->setVisible(true);
+    arrElement.last()->setIdElement(idElement);
+    idElement++;
+
     this->addItem(arrElement.last());
     int gridSize = MainElement::GetStepGrid();
     qreal xV = round(pos.x()/gridSize)*gridSize;
@@ -1330,6 +1393,9 @@ void Scene::AddRelayContact(QPoint pos)
 {
     arrElement.append(new RelayContact());
     arrElement.last()->setVisible(true);
+    arrElement.last()->setIdElement(idElement);
+    idElement++;
+
     this->addItem(arrElement.last());
 
     int gridSize = MainElement::GetStepGrid();
@@ -1363,6 +1429,9 @@ void Scene::AddRelay(QPoint pos)
 {
     arrElement.append(new RelayRelay());
     arrElement.last()->setVisible(true);
+    arrElement.last()->setIdElement(idElement);
+    idElement++;
+
     this->addItem(arrElement.last());
     int gridSize = MainElement::GetStepGrid();
     qreal xV = round(pos.x()/gridSize)*gridSize;
